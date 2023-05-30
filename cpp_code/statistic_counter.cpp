@@ -54,7 +54,7 @@ public:
                 cur->next[j] = new node();
                 cur->next[j]->prev = cur;
                 cur = cur->next[pref[j]];
-                if (pref[i] == ' ')
+                if (pref[i] == ' ' || i == len - 1)
                 {
                     cur->count++;
                     cur->pos = size;
