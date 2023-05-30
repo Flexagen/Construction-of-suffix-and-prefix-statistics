@@ -4,7 +4,7 @@
 <table style="border-collapse: collapse; border: none;">
   <tr style="border: none;">
     <td style="border: none;"><b>Разработчики:</b> студенты группы 22207 ПрИн ИМИТ ПетрГУ <br>
-                             <center> Афанасьев Артём построение статистики суффиксов<br>
+                             <center> Афанасьев Артём <br>
                                         Павлов Максим <br>
                                         Кириллов Иван </center>
     </td>
