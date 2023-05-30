@@ -29,8 +29,8 @@ public:
 // Вам надо ето
 class statistic_counter{
 private:
-    node* statistic[10000000];
-    node* root = new node();
+    node* statistic[200000];
+    node* root;
     int size;
     int pointer;
 public:
@@ -48,7 +48,6 @@ public:
             if (pref[i] >= 'A' && pref[i] <= 'Z')
                 pref[i] = pref[i] - 'A' + 'a';
             int j = pref[i] - 'a';
-            std::cout << j << "\n";
             if (pref[i] == ' ') {
                 cur->count++;
                 cur->pos = size;
@@ -59,7 +58,7 @@ public:
             if (cur->next[j] == nullptr){
                 cur->next[j] = new node();
                 cur->next[j]->prev = cur;
-                cur = cur->next[pref[j]];
+                cur = cur->next[j];
                 cur->c = pref[i];
                 if (i == len - 1)
                 {
@@ -140,7 +139,9 @@ public:
 
 // int main()
 // {
-
+//     statistic_counter s;
+//     s.add("sadasds");
+//     std::cout << s.get_next() << "\n";
 // }
 
 PYBIND11_MODULE(module_name, module_handle) {
