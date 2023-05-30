@@ -2,11 +2,11 @@
 #include<string>
 #include<iostream>
 #include<algorithm>
-#include <pybind11/pybind11.h>
-#include <pybind11/stl.h>
-#include <pybind11/numpy.h>
+// #include <pybind11/pybind11.h>
+// #include <pybind11/stl.h>
+// #include <pybind11/numpy.h>
 
-namespace py = pybind11;
+//namespace py = pybind11;
 
 // Ето вам не надо
 class node{
@@ -117,6 +117,8 @@ public:
 // Можно while get_next(): использовать чтобы все слова получить.
     std::string get_next()
     {
+        if (pointer >= size)
+            return "";
         node* cur = statistic[pointer];
         std::string result = "";
         int count = cur->count;
@@ -137,19 +139,21 @@ public:
     }
 };
 
-// int main()
-// {
-//     statistic_counter s;
-//     s.add("sadasds");
-//     std::cout << s.get_next() << "\n";
-// }
-
-PYBIND11_MODULE(module_name, module_handle) {
-    py::class_<statistic_counter>(module_handle, "statistic_counter")
-        .def(py::init<>())
-        .def("add", &statistic_counter::add)
-        .def("get_by_pref", &statistic_counter::get_by_pref)
-        .def("get_by_number", &statistic_counter::get_by_number)
-        .def("get_next", &statistic_counter::get_next)
-        .def("set_pointer", &statistic_counter::set_pointer);
+int main()
+{
+    statistic_counter s;
+    s.add("sadasds hndd");
+    std::cout << s.get_next() << "\n";
+    std::cout << s.get_next() << "\n";
+    std::cout << s.get_next() << "\n";
 }
+
+// PYBIND11_MODULE(module_name, module_handle) {
+//     py::class_<statistic_counter>(module_handle, "statistic_counter")
+//         .def(py::init<>())
+//         .def("add", &statistic_counter::add)
+//         .def("get_by_pref", &statistic_counter::get_by_pref)
+//         .def("get_by_number", &statistic_counter::get_by_number)
+//         .def("get_next", &statistic_counter::get_next)
+//         .def("set_pointer", &statistic_counter::set_pointer);
+// }
