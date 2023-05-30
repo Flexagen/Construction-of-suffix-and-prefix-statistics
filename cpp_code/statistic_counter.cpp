@@ -106,7 +106,7 @@ public:
             result = result + (char)((count % 10) + '0');
             count /= 10;
         }
-        result = get(pointer) + " " + result;
+        result = get_by_number(pointer) + " " + result;
         pointer++;
         return result;
     }
