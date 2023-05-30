@@ -30,7 +30,7 @@ public:
 class statistic_counter{
 private:
     node* statistic[10000000];
-    node* root;
+    node* root = new node();
     int size;
     int pointer;
 public:
@@ -48,6 +48,7 @@ public:
             if (pref[i] >= 'A' && pref[i] <= 'Z')
                 pref[i] = pref[i] - 'A' + 'a';
             int j = pref[i] - 'a';
+            std::cout << j << "\n";
             if (pref[i] == ' ') {
                 cur->count++;
                 cur->pos = size;
@@ -56,6 +57,10 @@ public:
                 continue;
             }
             if (cur->next[j] == nullptr){
+                cur->next[j] = new node();
+                cur->next[j]->prev = cur;
+                cur = cur->next[pref[j]];
+                cur->c = pref[i];
                 if (i == len - 1)
                 {
                     cur->count++;
@@ -63,10 +68,6 @@ public:
                     statistic[size] = cur;
                     size ++;
                 }
-                cur->next[j] = new node();
-                cur->next[j]->prev = cur;
-                cur = cur->next[pref[j]];
-                cur->c = pref[i];
             }
             else{
                 cur->next[j];
