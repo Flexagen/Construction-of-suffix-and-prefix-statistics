@@ -48,19 +48,24 @@ public:
             if (pref[i] >= 'A' && pref[i] <= 'Z')
                 pref[i] = pref[i] - 'A' + 'a';
             int j = pref[i] - 'a';
-            if (pref[i] == ' ')
-                j = 26;
+            if (pref[i] == ' ') {
+                cur->count++;
+                cur->pos = size;
+                statistic[size] = cur;
+                size ++;
+                continue;
+            }
             if (cur->next[j] == nullptr){
-                cur->next[j] = new node();
-                cur->next[j]->prev = cur;
-                cur = cur->next[pref[j]];
-                if (pref[i] == ' ' || i == len - 1)
+                if (i == len - 1)
                 {
                     cur->count++;
                     cur->pos = size;
                     statistic[size] = cur;
                     size ++;
                 }
+                cur->next[j] = new node();
+                cur->next[j]->prev = cur;
+                cur = cur->next[pref[j]];
                 cur->c = pref[i];
             }
             else{
@@ -85,7 +90,7 @@ public:
         for (int i = 0; i < len; i++){
             int j = pref[i] - 'a';
             if (pref[i] == ' ')
-                j = 26;
+                continue;
             if (cur->next[j] != nullptr)
                 cur = cur->next[j];
             else{
