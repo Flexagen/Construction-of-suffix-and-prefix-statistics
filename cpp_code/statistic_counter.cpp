@@ -2,11 +2,11 @@
 #include<string>
 #include<iostream>
 #include<algorithm>
-#include <pybind11/pybind11.h>
-#include <pybind11/stl.h>
-#include <pybind11/numpy.h>
+// #include <pybind11/pybind11.h>
+// #include <pybind11/stl.h>
+// #include <pybind11/numpy.h>
 
-namespace py = pybind11;
+//namespace py = pybind11;
 
 // Ето вам не надо
 class node{
@@ -44,16 +44,24 @@ public:
     {
         node* cur = root;
         int len = pref.length();
-        //std::cout << pref[0] << "\n";
         for (int i = 0; i < len; i++){
             if (pref[i] >= 'A' && pref[i] <= 'Z')
                 pref[i] = pref[i] - 'A' + 'a';
             int j = pref[i] - 'a';
             if (pref[i] == ' ') {
                 cur->count++;
-                cur->pos = size;
-                statistic[size] = cur;
-                size ++;
+                if (cur->count != 1) {
+                    while (cur->pos > 0 && cur->count > statistic[cur->pos - 1]->count) {
+                        cur->pos --;
+                        statistic[cur->pos]->pos ++;
+                        std::swap(statistic[cur->pos], statistic[cur->pos + 1]);
+                    }
+                }
+                else {
+                    cur->pos = size;
+                    statistic[size] = cur;
+                    size ++;
+                }
                 continue;
             }
             if (cur->next[j] == nullptr){
@@ -74,7 +82,7 @@ public:
                 if (i == len - 1)
                 {
                     cur->count++;
-                    if (cur->pos > 0 && cur->count > statistic[cur->pos - 1]->count)
+                    while (cur->pos > 0 && cur->count > statistic[cur->pos - 1]->count)
                     {
                         cur->pos --;
                         statistic[cur->pos]->pos ++;
@@ -143,27 +151,28 @@ public:
     }
 };
 
-// int main()
-// {
-//     statistic_counter s;
-//     s.add("The is the link to");
-//     s.add("is the link to");
-//     s.add("the link to");
-//     s.add("the");
-//     std::string p = s.get_next();
-//     while(p != "")
-//     {
-//         std::cout << p << "\n";
-//         p = s.get_next();
-//     }
-// }
-
-PYBIND11_MODULE(the_best_structure, module_handle) {
-    py::class_<statistic_counter>(module_handle, "statistic_counter")
-        .def(py::init<>())
-        .def("add", &statistic_counter::add)
-        .def("get_by_pref", &statistic_counter::get_by_pref)
-        .def("get_by_number", &statistic_counter::get_by_number)
-        .def("get_next", &statistic_counter::get_next)
-        .def("set_pointer", &statistic_counter::set_pointer);
+int main()
+{
+    statistic_counter s;
+    s.add("The is the link to");
+    s.add("is the link to");
+    s.add("the link to");
+    s.add("the");
+    s.add("the link to");
+    std::string p = s.get_next();
+    while(p != "")
+    {
+        std::cout << p << "\n";
+        p = s.get_next();
+    }
 }
+
+// PYBIND11_MODULE(the_best_structure, module_handle) {
+//     py::class_<statistic_counter>(module_handle, "statistic_counter")
+//         .def(py::init<>())
+//         .def("add", &statistic_counter::add)
+//         .def("get_by_pref", &statistic_counter::get_by_pref)
+//         .def("get_by_number", &statistic_counter::get_by_number)
+//         .def("get_next", &statistic_counter::get_next)
+//         .def("set_pointer", &statistic_counter::set_pointer);
+// }
