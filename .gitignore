@@ -5,6 +5,7 @@ __pycache__/
 
 .vscode
 *.exe
+cpp_code/pybind11/
 
 # C extensions
 *.so
