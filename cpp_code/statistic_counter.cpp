@@ -148,7 +148,7 @@ public:
 //     std::cout << s.get_next() << "\n";
 // }
 
-PYBIND11_MODULE(module_name, module_handle) {
+PYBIND11_MODULE(the_best_structure, module_handle) {
     py::class_<statistic_counter>(module_handle, "statistic_counter")
         .def(py::init<>())
         .def("add", &statistic_counter::add)
