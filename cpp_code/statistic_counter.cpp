@@ -30,10 +30,15 @@ public:
 class statistic_counter{
 private:
     node* statistic[10000000];
-    node* root = new node();
-    int size = 0;
-    int pointer = 0;
+    node* root;
+    int size;
+    int pointer;
 public:
+    statistic_counter() {
+        root = new node();
+        size = 0;
+        pointer = 0;
+    }
 // Добавление для префикса - просто слово передать, для суффикса - чуть посложнее ;)
     void add(std::string pref)
     {
@@ -42,19 +47,24 @@ public:
         for (int i = 0; i < len; i++){
             if (pref[i] >= 'A' && pref[i] <= 'Z')
                 pref[i] = pref[i] - 'A' + 'a';
-
-            if (cur->next[pref[i - 'a']] == nullptr){
-                cur->next[pref[i - 'a']] = new node();
-                cur->next[pref[i - 'a']]->prev = cur;
-                cur = cur->next[pref[i - 'a']];
-                cur->count++;
+            int j = pref[i] - 'a';
+            if (pref[i] == ' ')
+                j = 26;
+            if (cur->next[j] == nullptr){
+                cur->next[j] = new node();
+                cur->next[j]->prev = cur;
+                cur = cur->next[pref[j]];
+                if (pref[i] == ' ')
+                {
+                    cur->count++;
+                    cur->pos = size;
+                    statistic[size] = cur;
+                    size ++;
+                }
                 cur->c = pref[i];
-                cur->pos = size;
-                statistic[size] = cur;
-                size ++;
             }
             else{
-                cur->next[pref[i - 'a']];
+                cur->next[j];
                 cur->count++;
                 if (cur->pos > 0 && cur->count > statistic[cur->pos - 1]->count)
                 {
@@ -73,8 +83,11 @@ public:
         int len = pref.length();
         bool fl = true;
         for (int i = 0; i < len; i++){
-            if (cur->next[pref[i] - 'a'] != nullptr)
-                cur = cur->next[pref[i] - 'a'];
+            int j = pref[i] - 'a';
+            if (pref[i] == ' ')
+                j = 26;
+            if (cur->next[j] != nullptr)
+                cur = cur->next[j];
             else{
                 fl = false;
                 break;
@@ -119,9 +132,14 @@ public:
     }
 };
 
+// int main()
+// {
+
+// }
+
 PYBIND11_MODULE(module_name, module_handle) {
     py::class_<statistic_counter>(module_handle, "statistic_counter")
-        .def(py::init())
+        .def(py::init<>())
         .def("add", &statistic_counter::add)
         .def("get_by_pref", &statistic_counter::get_by_pref)
         .def("get_by_number", &statistic_counter::get_by_number)
