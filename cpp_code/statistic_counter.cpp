@@ -2,6 +2,11 @@
 #include<string>
 #include<iostream>
 #include<algorithm>
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+#include <pybind11/numpy.h>
+
+namespace py = pybind11;
 
 // Ето вам не надо
 class node{
@@ -62,7 +67,7 @@ public:
     }
 
 // Получение числа префиксов/суффикса pref
-    int get(std::string pref)
+    int get_by_pref(std::string pref)
     {
         node* cur = root;
         int len = pref.length();
@@ -79,7 +84,7 @@ public:
     }
 
 // Получение k-го по встречаемости преффикса/суффикса
-    std::string get(int k)
+    std::string get_by_number(int k)
     {
         node* cur = statistic[k];
         std::string result = "";
@@ -113,3 +118,13 @@ public:
         return old_pointer;
     }
 };
+
+PYBIND11_MODULE(module_name, module_handle) {
+    py::class_<statistic_counter>(module_handle, "statistic_counter")
+        .def(py::init())
+        .def("add", &statistic_counter::add)
+        .def("get_by_pref", &statistic_counter::get_by_pref)
+        .def("get_by_number", &statistic_counter::get_by_number)
+        .def("get_next", &statistic_counter::get_next)
+        .def("set_pointer", &statistic_counter::set_pointer);
+}
