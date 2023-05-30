@@ -44,6 +44,7 @@ public:
     {
         node* cur = root;
         int len = pref.length();
+        //std::cout << pref[0] << "\n";
         for (int i = 0; i < len; i++){
             if (pref[i] >= 'A' && pref[i] <= 'Z')
                 pref[i] = pref[i] - 'A' + 'a';
@@ -69,13 +70,16 @@ public:
                 }
             }
             else{
-                cur->next[j];
-                cur->count++;
-                if (cur->pos > 0 && cur->count > statistic[cur->pos - 1]->count)
+                cur = cur->next[j];
+                if (i == len - 1)
                 {
-                    cur->pos --;
-                    statistic[cur->pos - 1]->pos ++;
-                    std::swap(statistic[cur->pos - 1], statistic[cur->pos]);
+                    cur->count++;
+                    if (cur->pos > 0 && cur->count > statistic[cur->pos - 1]->count)
+                    {
+                        cur->pos --;
+                        statistic[cur->pos]->pos ++;
+                        std::swap(statistic[cur->pos], statistic[cur->pos + 1]);
+                    }
                 }
             }
         }
@@ -142,10 +146,16 @@ public:
 // int main()
 // {
 //     statistic_counter s;
-//     s.add("sadasds hndd");
-//     std::cout << s.get_next() << "\n";
-//     std::cout << s.get_next() << "\n";
-//     std::cout << s.get_next() << "\n";
+//     s.add("The is the link to");
+//     s.add("is the link to");
+//     s.add("the link to");
+//     s.add("the");
+//     std::string p = s.get_next();
+//     while(p != "")
+//     {
+//         std::cout << p << "\n";
+//         p = s.get_next();
+//     }
 // }
 
 PYBIND11_MODULE(module_name, module_handle) {
