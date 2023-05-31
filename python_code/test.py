@@ -15,7 +15,7 @@ def test_statistic_class():
 		assert(s != None)
 		s = p.get_next()
 	
-	if p.get_by_number(10) != "isthelink":
+	if p.get_by_number(11) != "is the link":
 		raise AssertionError("Тест поиска префикса/суффикса по номеру")
 
 	if p.get_by_pref('package') != 0:
@@ -24,7 +24,7 @@ def test_statistic_class():
 
 def test_prefix_statistic():
 	"""Тестирование модуля подсчёта статистики префиксов"""
-	p = Prefix_Stat('The is the link to the python package', 3)
+	p = Prefix_Stat('The is the link to the python package', 2)
 
 
 def test_suffix_statistic():
