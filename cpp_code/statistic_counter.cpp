@@ -167,7 +167,7 @@ public:
 //     }
 // }
 
-PYBIND11_MODULE(the_best_structure, module_handle) {
+PYBIND11_MODULE(statistics, module_handle) {
     py::class_<statistic_counter>(module_handle, "statistic_counter")
         .def(py::init<>())
         .def("add", &statistic_counter::add)
