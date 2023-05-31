@@ -20,7 +20,7 @@
 6. Масимальная частота употребления заданного суффикса/префикса в тексте.  
   
 ### Использование custom структуры для статистики суффиксов/префиксов
-Для хранения суффиксов/префиксов и их статистики была создана [собственная структура на C++](https://github.com/Flexagen/Construction-of-suffix-and-prefix-statistics/blob/main/cpp_code/statistic_counter.cpp), в основе которой лежит бор укказателе, чтобы максимально оптимизировать и ускорить алгоритм Маркова.  
+Для хранения суффиксов/префиксов и их статистики была создана [собственная структура на C++](https://github.com/Flexagen/Construction-of-suffix-and-prefix-statistics/blob/main/cpp_code/statistic_counter.cpp), в основе которой лежит бор укказателей, чтобы максимально оптимизировать и ускорить алгоритм Маркова.  
   
 С помощью библиотки pybind11 созданная структура обёрнута в [python .so библиотку](https://github.com/Flexagen/Construction-of-suffix-and-prefix-statistics/blob/main/python_code/statistics.so). Для её тестирования и базового использования написаны [мини-тесты](https://github.com/Flexagen/Construction-of-suffix-and-prefix-statistics/blob/main/python_code/test.py) (функциональные, позитивные).  
 ```python
