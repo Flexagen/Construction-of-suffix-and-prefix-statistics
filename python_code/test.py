@@ -24,7 +24,7 @@ def test_statistic_class():
 
 def test_prefix_statistic():
 	"""Тестирование модуля подсчёта статистики префиксов"""
-	p = Prefix_Stat('The is the link to the python package')
+	p = Prefix_Stat('The is the link to the python package', 3)
 
 
 def test_suffix_statistic():

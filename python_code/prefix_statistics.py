@@ -1,9 +1,17 @@
 import statistics
 
 class Prefix_Stat():
-	def __init__(self, text):
+	def __init__(self, text, k):
 		"""Инициализация. Поиск всех префиксов по полученному текстому"""
 		self.stat = statistics.statistic_counter()
+		words = text.split(' ')
+		print(words)
+		for cur in range(len(words)-k+1):
+			prefix = ""
+			for word_id in range(k):
+				prefix += words[word_id+cur]+' '
+			print(prefix)
+			self.stat.add(prefix)
 
 	def most_common_in_text(self):
 		"""Cамые часто встречающиеся префиксы в данном текстов"""
