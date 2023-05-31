@@ -25,11 +25,10 @@ public:
     }
 };
 
-
 // Вам надо ето
 class statistic_counter{
 private:
-    node* statistic[200000];
+    node** statistic = new node*[200000000];
     node* root;
     int size;
     int pointer;
@@ -62,7 +61,7 @@ public:
                     statistic[size] = cur;
                     size ++;
                 }
-                continue;
+                j = 26;
             }
             if (cur->next[j] == nullptr){
                 cur->next[j] = new node();
@@ -102,7 +101,7 @@ public:
         for (int i = 0; i < len; i++){
             int j = pref[i] - 'a';
             if (pref[i] == ' ')
-                continue;
+                j = 26;
             if (cur->next[j] != nullptr)
                 cur = cur->next[j];
             else{
@@ -116,6 +115,7 @@ public:
 // Получение k-го по встречаемости преффикса/суффикса
     std::string get_by_number(int k)
     {
+        k --;
         node* cur = statistic[k];
         std::string result = "";
         while(cur->prev != nullptr) {
@@ -138,7 +138,7 @@ public:
             result = result + (char)((count % 10) + '0');
             count /= 10;
         }
-        result = get_by_number(pointer) + " " + result;
+        result = get_by_number(pointer + 1) + " " + result;
         pointer++;
         return result;
     }
@@ -148,6 +148,10 @@ public:
         int old_pointer = pointer;
         pointer = new_value;
         return old_pointer;
+    }
+
+    ~statistic_counter() {
+        delete [] statistic;
     }
 };
 
@@ -165,6 +169,7 @@ public:
 //         std::cout << p << "\n";
 //         p = s.get_next();
 //     }
+//     std::cout << s.get_by_number(2) << "\n";
 // }
 
 PYBIND11_MODULE(the_best_structure, module_handle) {
