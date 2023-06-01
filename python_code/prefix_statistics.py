@@ -5,15 +5,15 @@ class Prefix_Stat():
 		"""Инициализация. Поиск всех префиксов по полученному текстому"""
 		self.stat = StatistiCuM.statistic_counter()
 		words = text.split(' ')
-		print(words)
+		# print(words)
 		for cur in range(len(words)-k+1):
 			prefix = ""
 			for word_id in range(k):
 				prefix += words[word_id+cur]+' '
-			print(prefix)
+			# print(prefix)
 			self.stat.add(prefix)
 
-	def most_common_in_text(self):
+	def most_common_in_text(self, n):
 		"""Cамые часто встречающиеся префиксы в данном текстов"""
 		None
 
