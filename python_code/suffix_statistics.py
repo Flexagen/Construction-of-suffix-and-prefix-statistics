@@ -17,8 +17,6 @@ class Suffix_Stat():
 
     def most_common_in_text(self, n):
 
-        print(123)
-
         """Cамые часто встречающиеся суффиксы в данном текстов"""
         array = [[]]
         count = -1
