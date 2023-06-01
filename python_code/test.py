@@ -9,17 +9,16 @@ def test_statistic_class():
 	p.add('is the link')
 	p.add('the ')
 	p.add('the is')
-	p.add('the	')
-	print()
+	p.add('the ')
 
 	# Тестирование обхода заколненной структуры методов get_next
 	s = p.get_next()
+	print(s)
 	while(s != ''):
 		assert(s != '')
 		assert(s != None)
-		# print(s)
+		print(s)
 		s = p.get_next()
-
 	if p.get_by_number(2) != "is the link":
 		raise AssertionError("Тест поиска префикса/суффикса по номеру")
 
@@ -31,9 +30,11 @@ def test_prefix_statistic():
 	None
 
 
+
 def test_suffix_statistic():
 	"""Тестирование модуля подсчёта статистики суффиксов"""
-	p = Suffix_Stat('The is the link to the python package', 2)
+	p = Suffix_Stat('The is the link to the python package', 1)
+	print(p.most_common_in_text(2))
 
 
 def print_test_passed(test_name):
