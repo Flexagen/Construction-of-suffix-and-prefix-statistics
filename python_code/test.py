@@ -13,6 +13,7 @@ text = """Advertisers study how people learn so that they can 'teach' them to re
 		  of the tea ... Here the same technique is being used as with the cool, 
 		  refreshing drink."""
 n_prefix = 2
+n_suffux = 1
 
 def test_statistic_class():
 	"""Тестирование .so обёртки для C++ структуры данных""" 
@@ -44,8 +45,8 @@ def test_prefix_statistic():
 
 def test_suffix_statistic():
 	"""Тестирование модуля подсчёта статистики суффиксов"""
-	p = Suffix_Stat(text, n_prefix)
-	p.most_common_in_text(2)
+	p = Suffix_Stat(text, n_suffux)
+	print(p.most_common_in_text_suffux(3))
 
 
 def print_test_passed(test_name):
@@ -56,8 +57,8 @@ if __name__ == "__main__":
 	test_name = ""
 	try:
 		test_name = "statistic_class"; test_statistic_class(); print_test_passed(test_name)
-		test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
-		# test_name = "suffix_statistic"; test_suffix_statistic(); print_test_passed(test_name)
+		# test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
+		test_name = "suffix_statistic"; test_suffix_statistic(); print_test_passed(test_name)
 		print("Well done!")
 	except AssertionError as error:
 		print("Test "+test_name+' '+'\033[101m'+"ERROR"+'\033[0m')

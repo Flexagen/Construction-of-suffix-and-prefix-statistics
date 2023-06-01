@@ -14,23 +14,22 @@ class Suffix_Stat():
             self.stat.add(suffix)
         
     
-    def most_common_in_text(self, n):
+    def most_common_in_text_suffux(self, n):
 
         """Cамые часто встречающиеся суффиксы в данном текстов"""
-        array = [[]]
+        array = []
         count = -1
         s = self.stat.get_next()
+        n = n+1
         while(s != ''):
-            if (n == 0):
-                break
-            if(len(array) > 1 and array[len(array)-2][1] == array[len(array)-1][1]):
-                n += 1    
-            else:
-                array.append([])
-                count += 1
-            array[count] = s.split(" ")
+            if(n > 0):
+                n -= 1
+                array.append(s.split(' '))
+                if(len(array) > 1 and array[len(array)-2][1] == array[len(array)-1][1]):
+                    n += 1
             s = self.stat.get_next()
-            n -= 1
+        array = array[:-1]
+        print()
         return(array)
 
     def most_common_in_word(self):
