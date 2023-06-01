@@ -1,9 +1,9 @@
-import statistics
+import StatistiCuM
 
 class Prefix_Stat():
 	def __init__(self, text, k):
 		"""Инициализация. Поиск всех префиксов по полученному текстому"""
-		self.stat = statistics.statistic_counter()
+		self.stat = StatistiCuM.statistic_counter()
 		words = text.split(' ')
 		print(words)
 		for cur in range(len(words)-k+1):
