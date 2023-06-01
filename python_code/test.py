@@ -10,6 +10,7 @@ def test_statistic_class():
 	p.add('the ')
 	p.add('the is')
 	p.add('the	')
+	print()
 
 	# Тестирование обхода заколненной структуры методов get_next
 	s = p.get_next()
