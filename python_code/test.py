@@ -43,12 +43,9 @@ if __name__ == "__main__":
 	test_name = ""
 	try:
 		test_name = "statistic_class"; test_statistic_class(); print_test_passed(test_name)
-<<<<<<< HEAD
-=======
 		test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
 		test_name = "suffix_statistic"; test_suffix_statistic(); print_test_passed(test_name)
 		print("Well done!")
->>>>>>> b26dea1 (upd)
 	except AssertionError as error:
 		print("Test "+test_name+' '+'\033[101m'+"ERROR"+'\033[0m')
 		print(error)
