@@ -1,9 +1,9 @@
-import statistics
-from prefix_statistics import Prefix_Stat
+import statistiCuM
+from suffix_statistics import Suffix_Stat
 
 def test_statistic_class():
 	"""Тестирование .so обёртки для C++ структуры данных""" 
-	p = statistics.statistic_counter()
+	p = statistiCuM.statistic_counter()
 	p.add('The is the link to the python package')
 	p.add('is the link to the python package I ')
 	p.add('the link to the python package I am')
@@ -22,9 +22,9 @@ def test_statistic_class():
 		raise AssertionError("Тест поиска префикса/суффикса")
 
 
-def test_prefix_statistic():
+def test_suffix_statistic():
 	"""Тестирование модуля подсчёта статистики префиксов"""
-	p = Prefix_Stat('The is the link to the python package', 2)
+	p = Suffix_Stat('The is the link to the python package', 2)
 
 
 def test_suffix_statistic():
@@ -39,7 +39,7 @@ if __name__ == "__main__":
 	test_name = ""
 	try:
 		test_name = "statistic_class"; test_statistic_class(); print_test_passed(test_name)
-		test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
+		test_name = "suffix_statistic"; test_suffix_statistic(); print_test_passed(test_name)
 	except AssertionError as error:
 		print("Test "+test_name+' '+'\033[101m'+"ERROR"+'\033[0m')
 		print(error)
