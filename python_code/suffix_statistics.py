@@ -14,7 +14,6 @@ class Suffix_Stat():
             self.stat.add(suffix)
         
     
-
     def most_common_in_text(self, n):
 
         """Cамые часто встречающиеся суффиксы в данном текстов"""

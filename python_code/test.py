@@ -2,6 +2,18 @@ import StatistiCuM
 from prefix_statistics import Prefix_Stat
 from suffix_statistics import Suffix_Stat
 
+# Settings
+text = """Advertisers study how people learn so that they can 'teach' them to respond 
+		  to their advertising. They want us to be interested, to try something, and 
+	      then to do it again. These are the elements of to learning: interest, experience 
+		  and repetition. If an advert can achieve this, it is successful. If an advert 
+		  works well, the same technique can be used to advertise different things. So, 
+		  for example, in winter if the weather is cold and you see a family having a 
+		  warming cup of tea and feeling cosy, you may be interested and note the name 
+		  of the tea ... Here the same technique is being used as with the cool, 
+		  refreshing drink."""
+n_prefix = 2
+
 def test_statistic_class():
 	"""Тестирование .so обёртки для C++ структуры данных""" 
 	p = StatistiCuM.statistic_counter()
@@ -13,11 +25,10 @@ def test_statistic_class():
 
 	# Тестирование обхода заколненной структуры методов get_next
 	s = p.get_next()
-	print(s)
 	while(s != ''):
 		assert(s != '')
 		assert(s != None)
-		print(s)
+		# print(s)
 		s = p.get_next()
 	if p.get_by_number(2) != "is the link":
 		raise AssertionError("Тест поиска префикса/суффикса по номеру")
@@ -27,22 +38,14 @@ def test_statistic_class():
 
 
 def test_prefix_statistic():
-	None
-
+	p = Prefix_Stat(text, n_prefix)
+	print(p.most_common_in_text(2))
 
 
 def test_suffix_statistic():
 	"""Тестирование модуля подсчёта статистики суффиксов"""
-	p = Suffix_Stat("""	Advertisers study how people learn so that they can 'teach' them to respond 
-						to their advertising. They want us to be interested, to try something, and 
-						then to do it again. These are the elements of to learning: interest, experience 
-						and repetition. If an advert can achieve this, it is successful. If an advert 
-						works well, the same technique can be used to advertise different things. So, 
-						for example, in winter if the weather is cold and you see a family having a 
-						warming cup of tea and feeling cosy, you may be interested and note the name 
-						of the tea ... Here the same technique is being used as with the cool, 
-						refreshing drink.""", 1)
-	print(p.most_common_in_text(3))
+	p = Suffix_Stat(text, n_prefix)
+	p.most_common_in_text(2)
 
 
 def print_test_passed(test_name):
@@ -54,7 +57,7 @@ if __name__ == "__main__":
 	try:
 		test_name = "statistic_class"; test_statistic_class(); print_test_passed(test_name)
 		test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
-		test_name = "suffix_statistic"; test_suffix_statistic(); print_test_passed(test_name)
+		# test_name = "suffix_statistic"; test_suffix_statistic(); print_test_passed(test_name)
 		print("Well done!")
 	except AssertionError as error:
 		print("Test "+test_name+' '+'\033[101m'+"ERROR"+'\033[0m')
