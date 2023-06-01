@@ -1,9 +1,9 @@
-import statistiCuM
+import StatistiCuM
 
 class Suffix_Stat():
     def __init__(self, text, k):
         """Инициализация. Поиск всех суффиксов по полученному текстому"""
-        self.stat = statistiCuM.statistic_counter()
+        self.stat = StatistiCuM.statistic_counter()
         words = text.split(' ')
         print(words)
         for cur in range(len(words)-k):
@@ -11,8 +11,6 @@ class Suffix_Stat():
             suffix += words[cur+k]
             print(suffix)
             self.stat.add(suffix)
-
-
 
 
 if __name__ == "__main__":
