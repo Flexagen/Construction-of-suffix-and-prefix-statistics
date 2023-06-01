@@ -1,5 +1,5 @@
 import StatistiCuM
-from prefix_statistics import Prefix_Stat
+from prefix_statistics import PrefixStat
 from suffix_statistics import Suffix_Stat
 
 # Settings
@@ -26,9 +26,9 @@ def test_statistic_class():
 
 	# Тестирование обхода заколненной структуры методов get_next
 	s = p.get_next()
-	while(s != ''):
-		assert(s != '')
-		assert(s != None)
+	while s != '':
+		assert('' != s)
+		assert(s is not None)
 		# print(s)
 		s = p.get_next()
 	if p.get_by_number(2) != "is the link":
@@ -39,14 +39,22 @@ def test_statistic_class():
 
 
 def test_prefix_statistic():
-	p = Prefix_Stat(text, n_prefix)
-	print(p.most_common_in_text(2))
+	p = PrefixStat(text, n_prefix)
+	# print(p.most_common_in_text(2))
 
 
 def test_suffix_statistic():
 	"""Тестирование модуля подсчёта статистики суффиксов"""
 	p = Suffix_Stat(text, n_suffux)
+	# Тестирование cамых часто встречающихся суффиксов в тексте
+	print(p.most_common_in_text_suffux(-10**20))
+	print(p.most_common_in_text_suffux(-10))
+	print(p.most_common_in_text_suffux(0))
+	print(p.most_common_in_text_suffux(1))
+	print(p.most_common_in_text_suffux(2))
 	print(p.most_common_in_text_suffux(3))
+	print(p.most_common_in_text_suffux(10))
+	print(p.most_common_in_text_suffux(10**20))
 
 
 def print_test_passed(test_name):
@@ -57,7 +65,7 @@ if __name__ == "__main__":
 	test_name = ""
 	try:
 		test_name = "statistic_class"; test_statistic_class(); print_test_passed(test_name)
-		# test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
+		test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
 		test_name = "suffix_statistic"; test_suffix_statistic(); print_test_passed(test_name)
 		print("Well done!")
 	except AssertionError as error:

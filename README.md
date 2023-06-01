@@ -23,10 +23,10 @@
 С помощью библиотки pybind11 созданная структура обёрнута в [python .so библиотку](https://github.com/Flexagen/Construction-of-suffix-and-prefix-statistics/blob/main/python_code/statistics.so). Для её тестирования и базового использования написаны [мини-тесты](https://github.com/Flexagen/Construction-of-suffix-and-prefix-statistics/blob/main/python_code/test.py) (функциональные, позитивные).  
 ```python
 # Для использования структуры необходимо только импортировать созданную обёртку
-import statistics
+import StatistiCuM
 
 # Которая будет перемычкой между разработанным классом
-p = statistics.statistic_counter()
+p = StatistiCuM.statistic_counter()
 p.add('test')
 print(p.get_next())
 ```
