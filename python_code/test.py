@@ -47,6 +47,7 @@ def test_suffix_statistic():
 	"""Тестирование модуля подсчёта статистики суффиксов"""
 	p = Suffix_Stat(text, n_suffux)
 	print(p.most_common_in_text_suffux(3))
+	print(p.average_length(text))
 
 
 def print_test_passed(test_name):
@@ -57,7 +58,7 @@ if __name__ == "__main__":
 	test_name = ""
 	try:
 		test_name = "statistic_class"; test_statistic_class(); print_test_passed(test_name)
-		# test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
+		test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
 		test_name = "suffix_statistic"; test_suffix_statistic(); print_test_passed(test_name)
 		print("Well done!")
 	except AssertionError as error:
