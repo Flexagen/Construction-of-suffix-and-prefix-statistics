@@ -25,7 +25,7 @@ public:
     }
 };
 
-// Вам надо ето
+// Вам над
 class statistic_counter{
 private:
     node** statistic = new node*[200000000];
