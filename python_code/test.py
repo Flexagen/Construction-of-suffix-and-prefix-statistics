@@ -33,8 +33,16 @@ def test_prefix_statistic():
 
 def test_suffix_statistic():
 	"""Тестирование модуля подсчёта статистики суффиксов"""
-	p = Suffix_Stat('The is the link to the python package', 1)
-	print(p.most_common_in_text(2))
+	p = Suffix_Stat("""	Advertisers study how people learn so that they can 'teach' them to respond 
+						to their advertising. They want us to be interested, to try something, and 
+						then to do it again. These are the elements of to learning: interest, experience 
+						and repetition. If an advert can achieve this, it is successful. If an advert 
+						works well, the same technique can be used to advertise different things. So, 
+						for example, in winter if the weather is cold and you see a family having a 
+						warming cup of tea and feeling cosy, you may be interested and note the name 
+						of the tea ... Here the same technique is being used as with the cool, 
+						refreshing drink.""", 1)
+	print(p.most_common_in_text(3))
 
 
 def print_test_passed(test_name):
