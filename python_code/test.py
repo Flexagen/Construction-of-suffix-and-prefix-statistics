@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import statistiCuM
-from suffix_statistics import Suffix_Stat
-
-def test_statistic_class():
-	"""Тестирование .so обёртки для C++ структуры данных""" 
-	p = statistiCuM.statistic_counter()
-	p.add('The is the link to the python package')
-	p.add('is the link to the python package I ')
-	p.add('the link to the python package I am')
-	
-=======
 import StatistiCuM
 from prefix_statistics import Prefix_Stat
 
@@ -22,7 +10,6 @@ def test_statistic_class():
 	p.add('the is')
 	p.add('the	')
 
->>>>>>> c4bc0d0d0024554c93a8a65cbe96e370219a5ad7
 	# Тестирование обхода заколненной структуры методов get_next
 	s = p.get_next()
 	while(s != ''):
@@ -55,11 +42,6 @@ if __name__ == "__main__":
 	test_name = ""
 	try:
 		test_name = "statistic_class"; test_statistic_class(); print_test_passed(test_name)
-<<<<<<< HEAD
-		test_name = "suffix_statistic"; test_suffix_statistic(); print_test_passed(test_name)
-=======
-		# test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
->>>>>>> c4bc0d0d0024554c93a8a65cbe96e370219a5ad7
 	except AssertionError as error:
 		print("Test "+test_name+' '+'\033[101m'+"ERROR"+'\033[0m')
 		print(error)
