@@ -40,12 +40,67 @@ def test_statistic_class():
 
 def test_prefix_statistic():
 	p = PrefixStat(text, n_prefix)
-	# print(p.most_common_in_text(2))
+
+	# Тест самых часто встречающихся префиксов в данном тексте
+	if p.most_common_in_text(-10 ** 20) != []:
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 1")
+	if p.most_common_in_text(-10) != []:
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 2")
+	if p.most_common_in_text(0) != []:
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 3")
+	if n_prefix == 2 and p.most_common_in_text(1) != [['if an', 'an advert', 'be interested', 'the same', 'same technique']]:
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 4")
+	print(p.most_common_in_text(10))
+	if n_prefix == 2 and p.most_common_in_text(10) != [['if an', 'an advert', 'be interested', 'the same', 'same technique'],
+									 ['so that', 'that they', 'they can', 'can teach', 'teach them',
+									  'them to', 'to respond', 'respond to', 'to their', 'their advertising',
+									  'advertising they', 'they want', 'want us', 'us to', 'to be', 'how people',
+									  'interested to', 'to try', 'try something', 'something and', 'and then',
+									  'then to', 'to do', 'do it', 'it again', 'again these', 'these are',
+									  'are the', 'the elements', 'elements of', 'of to', 'to learning',
+									  'learning interest', 'interest experience', 'experience and', 'and repetition'
+										 , 'repetition if', 'advertisers study', 'study how', 'advert can',
+									  'can achieve', 'achieve this', 'this it', 'it is', 'is successful',
+									  'successful if', 'advert works', 'works well', 'well the', 'people learn',
+									  'learn so', 'technique can', 'can be', 'be used', 'used to', 'to advertise',
+									  'advertise different', 'different things', 'things so', 'so for', 'for example',
+									  'example in', 'in winter', 'winter if', 'if the', 'the weather', 'weather is',
+									  'is cold', 'cold and', 'and you', 'you see', 'see a', 'a family',
+									  'family having', 'having a', 'a warming', 'warming cup', 'cup of',
+									  'of tea', 'tea and', 'and feeling', 'feeling cosy', 'cosy you', 'you may',
+									  'may be', 'interested and', 'and note', 'note the', 'the name', 'name of',
+									  'of the', 'the tea', 'tea here', 'here the', 'technique is', 'is being',
+									  'being used', 'used as', 'as with', 'with the', 'the cool', 'cool refreshing',
+									  'refreshing drink']]:
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 5")
+	if p.most_common_in_text_suffux(10 ** 20) != [['if an', 'an advert', 'be interested', 'the same', 'same technique'],
+									 ['so that', 'that they', 'they can', 'can teach', 'teach them',
+									  'them to', 'to respond', 'respond to', 'to their', 'their advertising',
+									  'advertising they', 'they want', 'want us', 'us to', 'to be', 'how people',
+									  'interested to', 'to try', 'try something', 'something and', 'and then',
+									  'then to', 'to do', 'do it', 'it again', 'again these', 'these are',
+									  'are the', 'the elements', 'elements of', 'of to', 'to learning',
+									  'learning interest', 'interest experience', 'experience and', 'and repetition'
+										 , 'repetition if', 'advertisers study', 'study how', 'advert can',
+									  'can achieve', 'achieve this', 'this it', 'it is', 'is successful',
+									  'successful if', 'advert works', 'works well', 'well the', 'people learn',
+									  'learn so', 'technique can', 'can be', 'be used', 'used to', 'to advertise',
+									  'advertise different', 'different things', 'things so', 'so for', 'for example',
+									  'example in', 'in winter', 'winter if', 'if the', 'the weather', 'weather is',
+									  'is cold', 'cold and', 'and you', 'you see', 'see a', 'a family',
+									  'family having', 'having a', 'a warming', 'warming cup', 'cup of',
+									  'of tea', 'tea and', 'and feeling', 'feeling cosy', 'cosy you', 'you may',
+									  'may be', 'interested and', 'and note', 'note the', 'the name', 'name of',
+									  'of the', 'the tea', 'tea here', 'here the', 'technique is', 'is being',
+									  'being used', 'used as', 'as with', 'with the', 'the cool', 'cool refreshing',
+									  'refreshing drink']]:
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 6")
 
 
 def test_suffix_statistic():
 	"""Тестирование модуля подсчёта статистики суффиксов"""
 	p = SuffixStat(text, n_suffux)
+
 	# Тест самых часто встречающихся суффиксов в данном тексте
 	if p.most_common_in_text_suffux(-10**20) != []:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 1")
