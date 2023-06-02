@@ -167,7 +167,16 @@ public:
                 j = pref[i] - '0' + 27;
             if (cur->next[j] != nullptr){
                 cur = cur->next[j];
-                i += cur->part.length();
+                if (pref.length() - i < cur->part.length()){
+                    fl = false;
+                    break;
+                }
+                for (int t = 0; t < cur->part.length(); t++, i++)
+                    if (pref[i] != cur->part[t]){
+                        fl = false;
+                        break;
+                    }
+                i--;
             }
             else{
                 fl = false;
@@ -232,7 +241,7 @@ public:
 // int main()
 // {
 //     statistic_counter s;
-//     s.add("The is the link to019");
+//     s.add("the is the link to019");
 //     s.add("is the link to");
 //     s.add("is the link to");
 //     s.add("is the link to");
