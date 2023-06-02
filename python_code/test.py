@@ -22,14 +22,13 @@ def test_statistic_class():
 	p.add('is the link')
 	p.add('the ')
 	p.add('the is')
-	p.add('the ')
 
 	# Тестирование обхода заколненной структуры методов get_next
 	s = p.get_next()
 	while(s != ''):
 		assert(s != '')
 		assert(s != None)
-		# print(s)
+		print(s)
 		s = p.get_next()
 
 	if p.get_by_number(2) != "is the link":
@@ -43,11 +42,11 @@ def test_statistic_class():
 		if p.get_by_number(i) == p.get_next():
 			raise AssertionError("Тест поиск префикса/суффикса по номеру")
 
-	if p.get_by_number(1) != 'The is ':
+	if p.get_by_number(1) != 'the is ':
 		raise AssertionError("Тест проверки в структуре слова с маленьких букв")
 
 def test_prefix_statistic():
-	p = PrefixStat(text, n_prefix)
+	p: PrefixStat = PrefixStat(text, n_prefix)
 
 	# Тест самых часто встречающихся префиксов в данном тексте
 	if p.most_common_in_text(-10 ** 20) != []:
@@ -80,7 +79,7 @@ def test_prefix_statistic():
 									  'being used', 'used as', 'as with', 'with the', 'the cool', 'cool refreshing',
 									  'refreshing drink']]:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 5")
-	if p.most_common_in_text_suffux(10 ** 20) != [['if an', 'an advert', 'be interested', 'the same', 'same technique'],
+	if p.most_common_in_text(10 ** 20) != [['if an', 'an advert', 'be interested', 'the same', 'same technique'],
 									 ['so that', 'that they', 'they can', 'can teach', 'teach them',
 									  'them to', 'to respond', 'respond to', 'to their', 'their advertising',
 									  'advertising they', 'they want', 'want us', 'us to', 'to be', 'how people',
@@ -141,8 +140,8 @@ def print_test_passed(test_name):
 if __name__ == "__main__":
 	test_name = ""
 	try:
-		# test_name = "statistic_class"; test_statistic_class(); print_test_passed(test_name)
-		# test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
+		test_name = "statistic_class"; test_statistic_class(); print_test_passed(test_name)
+		test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
 		test_name = "suffix_statistic"; test_suffix_statistic(); print_test_passed(test_name)
 		print("Well done!")
 	except AssertionError as error:
