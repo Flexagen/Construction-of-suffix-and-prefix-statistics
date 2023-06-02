@@ -17,8 +17,8 @@ class PrefixStat:
                                 .replace('\t', '') \
                                 .replace('\n', '') \
                                 .split(' '))))
-        # print(words)
         index = len(self.stat)-1
+        # print(self.text[index])
         for cur in range(len(self.text[index]) - k + 1):
             prefix = ""
             for word_id in range(k):
@@ -36,7 +36,7 @@ class PrefixStat:
         current_n = None
         last_n = None
         s = self.stat[index].get_next()
-
+        # print(s)
         while s != ' ':
             if s == '':
                 break
@@ -71,7 +71,9 @@ class PrefixStat:
 
     def mean_frequency_of_occurrence(self, prefix) -> None:
         """Средняя частота встречаемости заданного префикса в текстах"""
-        None
+        for text in self.stat:
+            print(text.get_by_pref(prefix))
+        return None
 
     def max_frequency_of_prefix_occurrence(self, prefix) -> None:
         """Масимальная частота употребления заданного префикса в тексте"""
