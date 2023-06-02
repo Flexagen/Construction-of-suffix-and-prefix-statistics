@@ -1,6 +1,13 @@
 import StatistiCuM
 import string
 
+class Text:
+	def __init__(self, text):
+		self.text = text # hash text 
+		self.parsed_text = list(filter(lambda word: word != '', text.translate(str.maketrans('', '', string.punctuation))  \
+                            .replace('\t', '') \
+                            .replace('\n', '') \
+                            .split(' ')))
 
 class PrefixStat:
     def __init__(self, text, k):

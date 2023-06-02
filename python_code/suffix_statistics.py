@@ -16,19 +16,27 @@ class SuffixStat:
         
     
     def most_common_in_text_suffux(self, n):
+        """Cамые часто встречающиеся суффиксы в данном тексте"""
+
         """Cамые часто встречающиеся суффиксы в данном текстов"""
         array = []
+        count = -1
         s = self.stat.get_next()
-        n = n+1
-        while s != '':
-            if n > 0 :
+        n = n + 1
+        k = 0
+        while(s != ''):
+            if(n > 0):
                 n -= 1
                 array.append(s.split(' '))
-                if len(array) > 1 and array[len(array)-2][1] == array[len(array)-1][1]:
+                if(len(array) > 1 and array[len(array)-2][1] == array[len(array)-1][1]):
                     n += 1
+            if k == 1:
+                array = array[:-1]
+                break
+            if n == 0:
+                k = 1
             s = self.stat.get_next()
-        array = array[:-1]
-        return array
+        return(array)
 
     def most_common_in_word(self):
         """Самые часто встречаемые префиксы после заданного слова"""
