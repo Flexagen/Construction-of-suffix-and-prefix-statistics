@@ -31,12 +31,20 @@ def test_statistic_class():
 		assert(s != None)
 		# print(s)
 		s = p.get_next()
+
 	if p.get_by_number(2) != "is the link":
 		raise AssertionError("Тест поиска префикса/суффикса по номеру")
 
 	if p.get_by_pref('package') != 0:
 		raise AssertionError("Тест поиска префикса/суффикса")
 
+	n = p.get_size()
+	for i in range(1, n+1):
+		if p.get_by_number(i) == p.get_next():
+			raise AssertionError("Тест поиск префикса/суффикса по номеру")
+
+	if p.get_by_number(1) != 'The is ':
+		raise AssertionError("Тест проверки в структуре слова с маленьких букв")
 
 def test_prefix_statistic():
 	p = PrefixStat(text, n_prefix)
@@ -50,7 +58,6 @@ def test_prefix_statistic():
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 3")
 	if n_prefix == 2 and p.most_common_in_text(1) != [['if an', 'an advert', 'be interested', 'the same', 'same technique']]:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 4")
-	print(p.most_common_in_text(1))
 	if n_prefix == 2 and p.most_common_in_text(10) != [['if an', 'an advert', 'be interested', 'the same', 'same technique'],
 									 ['so that', 'that they', 'they can', 'can teach', 'teach them',
 									  'them to', 'to respond', 'respond to', 'to their', 'their advertising',
@@ -58,8 +65,8 @@ def test_prefix_statistic():
 									  'interested to', 'to try', 'try something', 'something and', 'and then',
 									  'then to', 'to do', 'do it', 'it again', 'again these', 'these are',
 									  'are the', 'the elements', 'elements of', 'of to', 'to learning',
-									  'learning interest', 'interest experience', 'experience and', 'and repetition'
-										 , 'repetition if', 'advertisers study', 'study how', 'advert can',
+									  'learning interest', 'interest experience', 'experience and', 'and repetition',
+									  'repetition if', 'advertisers study', 'study how', 'advert can',
 									  'can achieve', 'achieve this', 'this it', 'it is', 'is successful',
 									  'successful if', 'advert works', 'works well', 'well the', 'people learn',
 									  'learn so', 'technique can', 'can be', 'be used', 'used to', 'to advertise',
