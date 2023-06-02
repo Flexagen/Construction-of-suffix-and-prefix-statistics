@@ -218,6 +218,10 @@ public:
         return old_pointer;
     }
 
+    int get_size(){
+        return size;
+    }
+
     ~statistic_counter(){
         for (int i = 0; i < size; i++)
             delete statistic[i];
@@ -256,5 +260,6 @@ PYBIND11_MODULE(StatistiCuM, module_handle) {
         .def("get_by_pref", &statistic_counter::get_by_pref)
         .def("get_by_number", &statistic_counter::get_by_number)
         .def("get_next", &statistic_counter::get_next)
-        .def("set_pointer", &statistic_counter::set_pointer);
+        .def("set_pointer", &statistic_counter::set_pointer)
+        .def("get_size", &statistic_counter::get_size);
 }
