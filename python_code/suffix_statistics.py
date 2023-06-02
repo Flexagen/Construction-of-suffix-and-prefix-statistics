@@ -25,8 +25,12 @@ class SuffixStat:
             return array
         s = self.stat.get_next()
         prev = -1
-        while s:
-
+        i = -1
+        while s != "":
+            if int(s.split(' ')[-1]) != prev:
+                arr.append([])
+                i += 1
+            arr[i].append(s.split(' ')[:-1])
 
         return(arr)
 
