@@ -23,7 +23,7 @@ class PrefixStat:
             for word_id in range(k):
                 prefix += words[word_id + cur] + ' '
             # print(prefix)
-            self.stat.add(prefix)
+            self.stat.add(prefix.lower())
 
     def most_common_in_text(self, n):
         """Cамые часто встречающиеся префиксы в данном текстов"""
