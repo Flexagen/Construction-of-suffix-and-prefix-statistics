@@ -25,13 +25,16 @@ class SuffixStat:
             return array
         s = self.stat.get_next()
         prev = -1
+        count = 0
         i = -1
-        while s != "":
+        while s != "" and count < n:
             if int(s.split(' ')[-1]) != prev:
                 arr.append([])
                 i += 1
             arr[i].append(s.split(' ')[:-1])
-
+            s = self.stat.get_next()
+            count += 1
+        print(arr)
         return(arr)
 
     def most_common_in_word(self):
