@@ -40,7 +40,7 @@ class PrefixStat:
             if s == '':
                 break
             data = s.split(' ')
-            print(s)
+            # print(s)
             last_n = current_n
             current_n = s[len(s) - 1]
             prefix = ""
