@@ -12,7 +12,7 @@ namespace py = pybind11;
 class node{
 public:
     node* prev;
-    node* next[27];
+    node* next[37];
     int count;
     int pos;
     std::string part;
@@ -51,6 +51,8 @@ private:
         int k = new_part[0] - 'a';
         if (new_part[0] == ' ')
             k = 26;
+        if (new_part[0] >= '0' && new_part[0] <= '9')
+            k = new_part[0] - '0' + 27;
         node* new_node = new node();
         new_node->prev = cur->prev;
         new_node->part = prev_part;
@@ -58,6 +60,8 @@ private:
         k = prev_part[0] - 'a';
         if (prev_part[0] == ' ')
             k = 26;
+        if (new_part[0] >= '0' && new_part[0] <= '9')
+            k = new_part[0] - '0' + 27;
         cur->prev->next[k] = new_node;
         cur->prev = new_node;
         cur->part = new_part;
@@ -102,7 +106,7 @@ public:
         pointer = 0;
     }
 
-// Добавление преффикса/суффикса
+// Добавление преффикса/суффикса 
     void add(std::string pref){
         node* cur = root;
         int len = pref.length();
@@ -112,6 +116,8 @@ public:
             int j = pref[i] - 'a';
             if (pref[i] == ' ')
                 j = 26;
+            if (pref[0] >= '0' && pref[0] <= '9')
+                j = pref[0] - '0' + 27;
             if (cur->next[j] == nullptr){
                 std::string cur_part(pref.begin() + i, pref.end());
                 cur->next[j] = create_node(cur_part);
@@ -130,6 +136,8 @@ public:
                         int k = pref[i + p] - 'a';
                         if (pref[i + p] == ' ')
                             k = 26;
+                        if (pref[0] >= '0' && pref[0] <= '9')
+                            k = pref[0] - '0' + 27;;
                         cur->next[k] = new node();
                         node* new_node = cur;
                         cur = cur->next[k];
@@ -158,6 +166,8 @@ public:
             int j = pref[i] - 'a';
             if (pref[i] == ' ')
                 j = 26;
+            if (pref[0] >= '0' && pref[0] <= '9')
+                j = pref[0] - '0' + 27;
             if (cur->next[j] != nullptr)
                 cur = cur->next[j];
             else{
@@ -219,7 +229,7 @@ public:
 // int main()
 // {
 //     statistic_counter s;
-//     s.add("The is the link to");
+//     s.add("The is the link to019");
 //     s.add("is the link to");
 //     s.add("is the link to");
 //     s.add("is the link to");
