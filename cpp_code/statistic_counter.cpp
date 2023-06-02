@@ -100,7 +100,7 @@ private:
 public:
     statistic_counter(){
         root = new node();
-        for (int i = 0; i < 100000; i++)
+        for (int i = 0; i < 1000000; i++)
             count[i] = {0, 0};
         size = 0;
         pointer = 0;
@@ -111,13 +111,11 @@ public:
         node* cur = root;
         int len = pref.length();
         for (int i = 0; i < len; i++){
-            if (pref[i] >= 'A' && pref[i] <= 'Z')
-                pref[i] = pref[i] - 'A' + 'a';
             int j = pref[i] - 'a';
             if (pref[i] == ' ')
                 j = 26;
-            if (pref[0] >= '0' && pref[0] <= '9')
-                j = pref[0] - '0' + 27;
+            if (pref[i] >= '0' && pref[i] <= '9')
+                j = pref[i] - '0' + 27;
             if (cur->next[j] == nullptr){
                 std::string cur_part(pref.begin() + i, pref.end());
                 cur->next[j] = create_node(cur_part);
@@ -136,8 +134,8 @@ public:
                         int k = pref[i + p] - 'a';
                         if (pref[i + p] == ' ')
                             k = 26;
-                        if (pref[0] >= '0' && pref[0] <= '9')
-                            k = pref[0] - '0' + 27;;
+                        if (pref[i] >= '0' && pref[i] <= '9')
+                            k = pref[i] - '0' + 27;;
                         cur->next[k] = new node();
                         node* new_node = cur;
                         cur = cur->next[k];
@@ -166,8 +164,8 @@ public:
             int j = pref[i] - 'a';
             if (pref[i] == ' ')
                 j = 26;
-            if (pref[0] >= '0' && pref[0] <= '9')
-                j = pref[0] - '0' + 27;
+            if (pref[i] >= '0' && pref[i] <= '9')
+                j = pref[i] - '0' + 27;
             if (cur->next[j] != nullptr)
                 cur = cur->next[j];
             else{
@@ -203,7 +201,7 @@ public:
         std::string result = "";
         int count = cur->count;
         while(count > 0){
-            result = result + (char)((count % 10) + '0');
+            result = (char)((count % 10) + '0') + result;
             count /= 10;
         }
         result = get_by_number(pointer + 1) + " " + result;
@@ -240,6 +238,10 @@ public:
 //     s.add("the link to");
 //     s.add("the");
 //     s.add("the link to");
+//     s.add("the");
+//     s.add("the");
+//     s.add("the");
+//     s.add("the");
 //     s.add("the");
 //     s.add("the");
 //     s.add("the");
