@@ -11,22 +11,27 @@ class SuffixStat:
         self.add(text, k)
 
     def add(self, text, k) -> None:
-        self.stat = StatistiCuM.statistic_counter()
-        words = text.translate(str.maketrans('', '', string.punctuation)).replace("\t","").replace("\n","").split(' ')
+        self.stat.append(StatistiCuM.statistic_counter())
+        self.text.append(list(filter(lambda word: word != '', text.translate(str.maketrans('', '', string.punctuation)) \
+                                .replace('\t', '') \
+                                .replace('\n', '') \
+                                .split(' '))))
         # print(words)
-        for cur in range(len(words)-k):
+        index = len(self.stat)-1
+        for cur in range(len(self.text[index]) - k):
             suffix = ""
-            suffix += words[cur+k]
+            suffix += self.text[index][cur+k]
             # print(suffix)
-            self.stat.add(suffix.lower())
+            self.stat[index].add(suffix.lower())
         
     
     def most_common_in_text_suffux(self, index, n) -> List:
         """Cамые часто встречающиеся суффиксы в данном тексте"""
+        
+        if n < 1 or index < 0 or index > len(self.stat) - 1:
+            return []
         self.stat[index].set_pointer(0)
         arr = [[]]
-        if n < 1:
-            return []
         s = self.stat[index].get_next()
         prev = -1
         count = -1
@@ -40,19 +45,19 @@ class SuffixStat:
                 break
             arr[count].append(s.split(' ')[:-1][0])
             s = self.stat[index].get_next()
-        self.stat.set_pointer(0)
+        self.stat[index].set_pointer(0)
         return list(filter(lambda x: x != [], arr))
 
-    def max_frequency_of_suffix_occurrence(self, suffix, n_text, text):
+    def max_frequency_of_suffix_occurrence(self, suffix, n_text):
         """Максимальная частота употребления заданного суффикса в текстах"""
         arr = []
         for text in self.stat:
-            arr = text.translate(str.maketrans('', '', string.punctuation)).replace("\t","").replace("\n","").split(' ')
-            arr = list(filter(lambda x: x != '', arr))
-            while arr != '':
-                n = 1
+            # arr = text.translate(str.maketrans('', '', string.punctuation)).replace("\t","").replace("\n","").split(' ')
+            # arr = list(filter(lambda x: x != '', arr))
+            # while text != '':
+            #     n = 1
             # print(arr)
-            return 
+            return text
         
 
     def mean_frequency_of_suffix_occurrence(self, suffix, n_text):

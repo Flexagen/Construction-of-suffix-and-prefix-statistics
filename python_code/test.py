@@ -112,17 +112,17 @@ def test_suffix_statistic():
 	p = SuffixStat(text, n_suffux)
 
 	# Тест самых часто встречающихся суффиксов в данном тексте
-	if p.most_common_in_text_suffux(-10**20) != []:
+	if p.most_common_in_text_suffux(0, -10**20) != []:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 1")
-	if p.most_common_in_text_suffux(-10) != []:
+	if p.most_common_in_text_suffux(0, -10) != []:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 2")
-	if p.most_common_in_text_suffux(0) != []:
+	if p.most_common_in_text_suffux(0, 0) != []:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 3")
-	if p.most_common_in_text_suffux(1) != [['to', 'the']]:
+	if p.most_common_in_text_suffux(0, 1) != [['to', 'the']]:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 4")
-	if p.most_common_in_text_suffux(3) != [['to', 'the'], ['and'], ['if', 'can', 'be', 'of', 'is']]:
+	if p.most_common_in_text_suffux(0, 3) != [['to', 'the'], ['and'], ['if', 'can', 'be', 'of', 'is']]:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 5")
-	if p.most_common_in_text_suffux(10**20) != [['to', 'the'], ['and'], ['if', 'can', 'be', 'of', 'is'],
+	if p.most_common_in_text_suffux(0, 10**20) != [['to', 'the'], ['and'], ['if', 'can', 'be', 'of', 'is'],
 											['they', 'it', 'so', 'advert', 'a', 'an', 'you',
 											 'interested', 'tea', 'same', 'technique', 'used'],
 											['people', 'then', 'do', 'study', 'again', 'these',
@@ -136,7 +136,7 @@ def test_suffix_statistic():
 											 'name', 'here', 'being', 'as', 'with', 'cool', 'refreshing', 'drink']]:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 6")
 	
-	print(p.most_common_in_word(suffix, n_text, text))
+	print(p.max_frequency_of_suffix_occurrence(suffix, n_text))
 
 
 def print_test_passed(test_name):
