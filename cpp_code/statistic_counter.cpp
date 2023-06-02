@@ -96,7 +96,6 @@ private:
         size ++;
         return new_node;
     }
-
 public:
     statistic_counter(){
         root = new node();
@@ -167,7 +166,10 @@ public:
             if (pref[i] >= '0' && pref[i] <= '9')
                 j = pref[i] - '0' + 27;
             if (cur->next[j] != nullptr)
+            {
                 cur = cur->next[j];
+                i += cur->part.length();
+            }
             else{
                 fl = false;
                 break;
@@ -253,6 +255,7 @@ public:
 //         p = s.get_next();
 //     }
 //     std::cout << s.get_by_number(4) << "\n";
+//     std::cout << s.get_by_pref("is the link to") << "\n";
 // }
 
 PYBIND11_MODULE(StatistiCuM, module_handle) {
