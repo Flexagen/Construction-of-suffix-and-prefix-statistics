@@ -14,8 +14,6 @@ text = """Advertisers study how people learn so that they can 'teach' them to re
 		  refreshing drink."""
 n_prefix = 2
 n_suffux = 1
-suffix = "the"
-n_text = 1
 
 def test_statistic_class():
 	"""Тестирование .so обёртки для C++ структуры данных""" 
@@ -105,15 +103,16 @@ def test_prefix_statistic():
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 6")
 
 	if p.most_common_in_text(-10, 0) != [[]]:
-		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 6")
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 7")
 	if p.most_common_in_text(1, 0) != [[]]:
-		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 6")
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 7")
 	if p.most_common_in_text(10, 0) != [[]]:
-		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 6")
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 7")
 
-	p.add('if an '+text, n_prefix)
+	p.add('if an '+text+' of the scum of the scum', n_prefix)
 	p.mean_frequency_of_occurrence('if an')
 	p.max_frequency_of_prefix_occurrence('if an')
+	p.most_common_in_word(1, 'of the', 10**20)
 
 def test_suffix_statistic():
 	"""Тестирование модуля подсчёта статистики суффиксов"""
@@ -143,15 +142,21 @@ def test_suffix_statistic():
 											 'warming', 'cup', 'them', 'feeling', 'cosy', 'may', 'note',
 											 'name', 'here', 'being', 'as', 'with', 'cool', 'refreshing', 'drink']]:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 6")
-	
+	if p.most_common_in_text_suffux(-10, 0) != []:
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 7")
+	if p.most_common_in_text_suffux(1, 0) != []:
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 8")
+	if p.most_common_in_text_suffux(10, 0) != []:
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 9")
+
 	p.add("""	Secondary schools are usually much larger than primary schools and most children - 
 				over 80 percent - go to a comprehensive school at the age of 11. These schools are 
 				for all. Pupils do not need (to pass an exam to go to these schools. These schools 
 				are large. They have from 1.200 - 2.500 pupils. School lasts all day in the UK, so 
 				there is only one shift. In some areas there are grammar schools. Pupils must pass 
-				special exams to go to these schools.""", n_suffux)
-	p.max_frequency_of_suffix_occurrence(suffix)
-
+				special exams to go to these schools. to to to to to to to to to to to""", n_suffux)
+	p.max_frequency_of_suffix_occurrence("to")
+	p.mean_frequency_of_suffix_occurrence("to")
 
 def print_test_passed(test_name):
 	print("Test "+test_name+" "+'\033[42m'+"PASSED"+'\033[0m')
@@ -161,7 +166,7 @@ if __name__ == "__main__":
 	test_name = ""
 	try:
 		test_name = "statistic_class"; test_statistic_class(); print_test_passed(test_name)
-		# test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
+		test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
 		test_name = "suffix_statistic"; test_suffix_statistic(); print_test_passed(test_name)
 		print("Well done!")
 	except AssertionError as error:

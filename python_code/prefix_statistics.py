@@ -1,5 +1,5 @@
-import StatistiCuM
 import string
+import StatistiCuM
 
 from typing import List
 
@@ -58,9 +58,43 @@ class PrefixStat:
         self.stat[index].set_pointer(0)
         return list(filter(lambda x: x != [], arr))
 
-    def most_common_in_word(self) -> None:
-        """Самые часто встречаемые префиксы после заданного слова"""
-        None
+    def most_common_in_word(self, index, prefix, n) -> None:
+        """Самые часто встречаемые суффиксы после заданного префикса"""
+        if n < 1 or index < 0 or index > len(self.stat)-1:
+            return [[]]
+        s = prefix.split(' ')
+        suffux = StatistiCuM.statistic_counter()
+        arr = [[]]
+        count = 0
+        last_n = None
+        current_n = None
+        for cur in range(len(self.text[index]) - len(s) + 1):
+            current_prefix = ""
+            for word_id in range(len(s)):
+                current_prefix += self.text[index][word_id + cur] + ' '
+            current_prefix = current_prefix[:len(current_prefix)-1]
+            if current_prefix == prefix:
+                suffux.add(self.text[index][word_id + cur + 1])
+
+        s = suffux.get_next()
+        while s != ' ':
+            if s == '':
+                break
+            data = s.split(' ')
+            prefix = ' '.join(data[:-1])
+            last_n = current_n
+            current_n = data[len(data) - 1]
+
+            if current_n != last_n and last_n is not None:
+                arr.append([])
+                count += 1
+
+            if count == n:
+                break
+
+            arr[count].append(prefix+' '+current_n)
+            s = suffux.get_next()
+        return list(filter(lambda x: x != [], arr))
 
     def mean_frequency_of_occurrence(self, prefix) -> None:
         """Средняя частота встречаемости заданного префикса в текстах"""

@@ -1,6 +1,7 @@
-from typing import List
 import StatistiCuM
 import string
+
+from typing import List
 
 
 class SuffixStat:
@@ -20,13 +21,12 @@ class SuffixStat:
         index = len(self.stat)-1
         for cur in range(len(self.text[index]) - k):
             suffix = self.text[index][cur+k]
-            print (list(suffix))
+            # print (list(suffix))
             self.stat[index].add(suffix.lower())
         
     
     def most_common_in_text_suffux(self, index, n) -> List:
         """Cамые часто встречающиеся суффиксы в данном тексте"""
-        
         if n < 1 or index < 0 or index > len(self.stat) - 1:
             return []
         self.stat[index].set_pointer(0)
@@ -51,17 +51,17 @@ class SuffixStat:
         """Максимальная частота употребления заданного суффикса в текстах"""
         max = 0
         for text in self.stat:
-            print(text.get_by_pref(suffix))
             if max < text.get_by_pref(suffix):
                 max = text.get_by_pref(suffix)
-            # print(max)
         return (max)
         
 
     def mean_frequency_of_suffix_occurrence(self, suffix):
         """Средняя частота встречаемости заданного суффикса в текстах"""
-        # потом
-        None
+        arr = []
+        for text in self.stat:
+            arr.append(text.get_by_pref(suffix))
+        return sum(arr) / len(arr)
 
 if __name__ == "__main__":
 	print("Нас Reboot, а мы крепчаем ʕ ᵔᴥᵔ ʔ")
