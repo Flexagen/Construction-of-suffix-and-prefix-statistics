@@ -42,7 +42,8 @@ class statistic_counter{
 private:
     node** statistic = new node*[200000000];
     node* root;
-    std::pair<int, int>* count = new std::pair<int, int>[1000000];
+    int s;
+    std::vector<std::pair<int, int>> count;
     int size;
     int pointer;
     node* split(node* cur, int& p){
@@ -69,6 +70,10 @@ private:
     }
 
     void update_statistic(node* cur){
+        if(cur->count >= s - 1){
+            s = (s < 100000000 ? s * 10 : s * 2);
+            count.resize(s);
+        }
         if (cur->count != 1){
             if (count[cur->count - 1].second != count[cur->count - 1].first){
                 int prev_pos = statistic[count[cur->count - 1].first]->pos;
@@ -90,6 +95,10 @@ private:
         node* new_node = new node();
         new_node->part = part;
         new_node->count++;
+        if(new_node->count >= s - 1){
+            s = (s < 100000000 ? s * 10 : s * 2);
+            count.resize(s);
+        }
         count[new_node->count].second ++;
         new_node->pos = size;
         statistic[size] = new_node;
@@ -100,8 +109,8 @@ private:
 public:
     statistic_counter(){
         root = new node();
-        for (int i = 0; i < 100000; i++)
-            count[i] = {0, 0};
+        s = 100;
+        count.resize(s);
         size = 0;
         pointer = 0;
     }
@@ -201,7 +210,7 @@ public:
         std::string result = "";
         int count = cur->count;
         while(count > 0){
-            result = result + (char)((count % 10) + '0');
+            result = (char)((count % 10) + '0') + result;
             count /= 10;
         }
         result = get_by_number(pointer + 1) + " " + result;
@@ -224,7 +233,6 @@ public:
         for (int i = 0; i < size; i++)
             delete statistic[i];
         delete [] statistic;
-        delete [] count;
     }
 };
 
@@ -232,9 +240,9 @@ public:
 // {
 //     statistic_counter s;
 //     s.add("the is the link to019");
+//     s.add("is the Link to");
 //     s.add("is the link to");
-//     s.add("is the link to");
-//     s.add("is the link to");
+//     s.add("is the link To");
 //     s.add("the link to");
 //     s.add("the");
 //     s.add("the link to");
