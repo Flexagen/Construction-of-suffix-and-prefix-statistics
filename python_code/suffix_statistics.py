@@ -12,7 +12,7 @@ class SuffixStat:
             suffix = ""
             suffix += words[cur+k]
             # print(suffix)
-            self.stat.add(suffix)
+            self.stat.add(suffix.lower())
         
     
     def most_common_in_text_suffux(self, n):
