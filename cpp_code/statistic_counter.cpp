@@ -15,7 +15,7 @@ public:
     node* next[27];
     int count;
     int pos;
-    char c;
+    std::string part;
     node(){
         count = 0;
         pos = 0;
@@ -50,14 +50,15 @@ public:
             if (pref[i] >= 'A' && pref[i] <= 'Z')
                 pref[i] = pref[i] - 'A' + 'a';
             int j = pref[i] - 'a';
-            if (pref[i] == ' ') {
+            if (pref[i] == ' ')
                 j = 26;
-            }
             if (cur->next[j] == nullptr){
                 cur->next[j] = new node();
                 cur->next[j]->prev = cur;
                 cur = cur->next[j];
-                cur->c = pref[i];
+                std::string cur_part(pref.begin() + i, pref.end());
+                cur->part = cur_part;
+                i = len - 1;
                 if (i == len - 1)
                 {
                     cur->count++;
@@ -69,7 +70,42 @@ public:
             }
             else{
                 cur = cur->next[j];
-                if (i == len - 1){
+                std::string cur_part(pref.begin() + i, pref.end());
+                int p = 0;
+                for (p = 0; p < cur->part.length() && p < cur_part.length() && cur->part[p] == cur_part[p]; p++);
+                if (p < cur->part.length()) {
+                    std::string prev_part(cur->part.begin(), cur->part.begin() + p);
+                    std::string new_part(cur->part.begin() + p, cur->part.end());
+                    int k = new_part[0] - 'a';
+                    if (new_part[0] == ' ')
+                        k = 26;
+                    node* new_node = new node();
+                    new_node->prev = cur->prev;
+                    new_node->part = prev_part;
+                    new_node->next[k] = cur;
+                    k = prev_part[0] - 'a';
+                    if (prev_part[0] == ' ')
+                        k = 26;
+                    cur->prev->next[k] = new_node;
+                    cur->prev = new_node;
+                    cur->part = new_part;
+                    cur = new_node;
+                    if (i + p < len) {
+                        k = pref[i + p] - 'a';
+                        if (pref[i + p] == ' ')
+                            k = 26;
+                        new_node->next[k] = new node();
+                        cur = new_node->next[k];
+                        cur->prev = new_node;
+                        std::string s(cur_part.begin() + p, cur_part.end());
+                        cur->part = s;
+                    }
+                    i = len - 1;
+                }
+                else {
+                    i += p - 1;
+                }
+                if (i >= len - 1){
                     cur->count++;
                     if (cur->count != 1){
                         if (count[cur->count - 1].second != count[cur->count - 1].first) {
@@ -118,7 +154,7 @@ public:
         node* cur = statistic[k];
         std::string result = "";
         while(cur->prev != nullptr) {
-            result = cur->c + result; 
+            result = cur->part + result; 
             cur = cur->prev;
         }
         return result;
