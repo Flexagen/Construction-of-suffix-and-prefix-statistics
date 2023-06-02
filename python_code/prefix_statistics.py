@@ -17,18 +17,19 @@ class PrefixStat:
                                 .replace('\t', '') \
                                 .replace('\n', '') \
                                 .split(' '))))
-        # print(words)
         index = len(self.stat)-1
+        # print(self.text[index])
         for cur in range(len(self.text[index]) - k + 1):
             prefix = ""
             for word_id in range(k):
                 prefix += self.text[index][word_id + cur] + ' '
+            prefix = prefix[:len(prefix)-1]
             # print(prefix)
             self.stat[index].add(prefix.lower())
 
     def most_common_in_text(self, index, n) -> List[List]:
         """Cамые часто встречающиеся префиксы в данном текстов"""
-        if n < 1 or index < 0 or index > len(self.stat):
+        if n < 1 or index < 0 or index > len(self.stat)-1:
             return [[]]
         self.stat[index].set_pointer(0)
         arr = [[]]
@@ -36,20 +37,14 @@ class PrefixStat:
         current_n = None
         last_n = None
         s = self.stat[index].get_next()
-
+        # print(s)
         while s != ' ':
             if s == '':
                 break
             data = s.split(' ')
-            # print(s)
+            prefix = ' '.join(data[:-1])
             last_n = current_n
-            current_n = s[len(s) - 1]
-            prefix = ""
-
-            for word in data:
-                if word == '':
-                    break
-                prefix += word + ' '
+            current_n = data[len(data)-1]
 
             if current_n != last_n and last_n is not None:
                 arr.append([])
@@ -58,10 +53,8 @@ class PrefixStat:
             if count == n:
                 break
 
-            arr[count].append(prefix[:len(prefix) - 1])
-
+            arr[count].append(prefix)
             s = self.stat[index].get_next()
-
         self.stat[index].set_pointer(0)
         return list(filter(lambda x: x != [], arr))
 
@@ -71,11 +64,18 @@ class PrefixStat:
 
     def mean_frequency_of_occurrence(self, prefix) -> None:
         """Средняя частота встречаемости заданного префикса в текстах"""
-        None
+        arr = []
+        for text in self.stat:
+            arr.append(text.get_by_pref(prefix))
+        return sum(arr)/len(arr)
 
     def max_frequency_of_prefix_occurrence(self, prefix) -> None:
-        """Масимальная частота употребления заданного префикса в тексте"""
-        None
+        """Масимальная частота употребления заданного префикса в текстах"""
+        max = 0
+        for text in self.stat:
+            if text.get_by_pref(prefix) > max:
+                max = text.get_by_pref(prefix)
+        return max
 
 
 if __name__ == "__main__":
