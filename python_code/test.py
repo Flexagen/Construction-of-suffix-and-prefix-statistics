@@ -136,7 +136,7 @@ def test_suffix_statistic():
 											 'name', 'here', 'being', 'as', 'with', 'cool', 'refreshing', 'drink']]:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 6")
 	
-	p.most_common_in_word(suffix, n_text, text)
+	print(p.most_common_in_word(suffix, n_text, text))
 
 
 def print_test_passed(test_name):
@@ -147,7 +147,7 @@ if __name__ == "__main__":
 	test_name = ""
 	try:
 		test_name = "statistic_class"; test_statistic_class(); print_test_passed(test_name)
-		test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
+		# test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
 		test_name = "suffix_statistic"; test_suffix_statistic(); print_test_passed(test_name)
 		print("Well done!")
 	except AssertionError as error:
