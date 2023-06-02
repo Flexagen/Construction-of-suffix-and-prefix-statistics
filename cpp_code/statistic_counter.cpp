@@ -20,7 +20,7 @@ public:
         count = 0;
         pos = 0;
         prev = nullptr;
-        for (int i = 0; i < 27; i++)
+        for (int i = 0; i < 37; i++)
             next[i] = nullptr;
     }
 };
@@ -116,8 +116,8 @@ public:
             int j = pref[i] - 'a';
             if (pref[i] == ' ')
                 j = 26;
-            if (pref[0] >= '0' && pref[0] <= '9')
-                j = pref[0] - '0' + 27;
+            if (pref[i] >= '0' && pref[i] <= '9')
+                j = pref[i] - '0' + 27;
             if (cur->next[j] == nullptr){
                 std::string cur_part(pref.begin() + i, pref.end());
                 cur->next[j] = create_node(cur_part);
@@ -136,8 +136,8 @@ public:
                         int k = pref[i + p] - 'a';
                         if (pref[i + p] == ' ')
                             k = 26;
-                        if (pref[0] >= '0' && pref[0] <= '9')
-                            k = pref[0] - '0' + 27;;
+                        if (pref[i] >= '0' && pref[i] <= '9')
+                            k = pref[i] - '0' + 27;;
                         cur->next[k] = new node();
                         node* new_node = cur;
                         cur = cur->next[k];
@@ -166,8 +166,8 @@ public:
             int j = pref[i] - 'a';
             if (pref[i] == ' ')
                 j = 26;
-            if (pref[0] >= '0' && pref[0] <= '9')
-                j = pref[0] - '0' + 27;
+            if (pref[i] >= '0' && pref[i] <= '9')
+                j = pref[i] - '0' + 27;
             if (cur->next[j] != nullptr)
                 cur = cur->next[j];
             else{
