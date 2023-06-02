@@ -28,9 +28,9 @@ class PrefixStat:
 
     def most_common_in_text(self, index, n) -> List[List]:
         """Cамые часто встречающиеся префиксы в данном текстов"""
-        self.stat[index].set_pointer(0)
-        if n < 1:
+        if n < 1 or index < 0 or index > len(self.stat):
             return [[]]
+        self.stat[index].set_pointer(0)
         arr = [[]]
         count = 0
         current_n = None
