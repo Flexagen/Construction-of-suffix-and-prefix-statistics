@@ -18,7 +18,7 @@ n_suffux = 1
 def test_statistic_class():
 	"""Тестирование .so обёртки для C++ структуры данных""" 
 	p = StatistiCuM.statistic_counter()
-	p.add('The is ')
+	p.add('the is ')
 	p.add('is the link')
 	p.add('the ')
 	p.add('the is')
@@ -49,15 +49,15 @@ def test_prefix_statistic():
 	p: PrefixStat = PrefixStat(text, n_prefix)
 
 	# Тест самых часто встречающихся префиксов в данном тексте
-	if p.most_common_in_text(-10 ** 20) != []:
+	if p.most_common_in_text(0, -10 ** 20) != [[]]:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 1")
-	if p.most_common_in_text(-10) != []:
+	if p.most_common_in_text(0, -10) != [[]]:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 2")
-	if p.most_common_in_text(0) != []:
+	if p.most_common_in_text(0, 0) != [[]]:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 3")
-	if n_prefix == 2 and p.most_common_in_text(1) != [['if an', 'an advert', 'be interested', 'the same', 'same technique']]:
+	if n_prefix == 2 and p.most_common_in_text(0, 1) != [['if an', 'an advert', 'be interested', 'the same', 'same technique']]:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 4")
-	if n_prefix == 2 and p.most_common_in_text(10) != [['if an', 'an advert', 'be interested', 'the same', 'same technique'],
+	if n_prefix == 2 and p.most_common_in_text(0, 10) != [['if an', 'an advert', 'be interested', 'the same', 'same technique'],
 									 ['so that', 'that they', 'they can', 'can teach', 'teach them',
 									  'them to', 'to respond', 'respond to', 'to their', 'their advertising',
 									  'advertising they', 'they want', 'want us', 'us to', 'to be', 'how people',
@@ -79,7 +79,7 @@ def test_prefix_statistic():
 									  'being used', 'used as', 'as with', 'with the', 'the cool', 'cool refreshing',
 									  'refreshing drink']]:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 5")
-	if p.most_common_in_text(10 ** 20) != [['if an', 'an advert', 'be interested', 'the same', 'same technique'],
+	if p.most_common_in_text(0, 10 ** 20) != [['if an', 'an advert', 'be interested', 'the same', 'same technique'],
 									 ['so that', 'that they', 'they can', 'can teach', 'teach them',
 									  'them to', 'to respond', 'respond to', 'to their', 'their advertising',
 									  'advertising they', 'they want', 'want us', 'us to', 'to be', 'how people',
