@@ -19,9 +19,8 @@ class SuffixStat:
         # print(words)
         index = len(self.stat)-1
         for cur in range(len(self.text[index]) - k):
-            suffix = ""
-            suffix += self.text[index][cur+k]
-            # print(suffix)
+            suffix = self.text[index][cur+k]
+            print (list(suffix))
             self.stat[index].add(suffix.lower())
         
     
@@ -50,11 +49,13 @@ class SuffixStat:
 
     def max_frequency_of_suffix_occurrence(self, suffix):
         """Максимальная частота употребления заданного суффикса в текстах"""
-        arr = []
+        max = 0
         for text in self.stat:
-            arr.append(text.get_by_pref(suffix))
-            
-        return (max(arr))
+            print(text.get_by_pref(suffix))
+            if max < text.get_by_pref(suffix):
+                max = text.get_by_pref(suffix)
+            # print(max)
+        return (max)
         
 
     def mean_frequency_of_suffix_occurrence(self, suffix):
