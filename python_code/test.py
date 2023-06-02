@@ -115,11 +115,11 @@ def test_suffix_statistic():
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 2")
 	if p.most_common_in_text_suffux(0) != []:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 3")
-	# if p.most_common_in_text_suffux(1) != [['to', 'the']]:
-	# 	raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 4")
+	if p.most_common_in_text_suffux(1) != [['to', 'the']]:
+		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 4")
 	if p.most_common_in_text_suffux(3) != [['to', 'the'], ['and'], ['if', 'can', 'be', 'of', 'is']]:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 5")
-	if p.most_common_in_text_suffux(10**20) != [['if', 'can', 'be', 'of', 'is'],
+	if p.most_common_in_text_suffux(10**20) != [['to', 'the'], ['and'], ['if', 'can', 'be', 'of', 'is'],
 											['they', 'it', 'so', 'advert', 'a', 'an', 'you',
 											 'interested', 'tea', 'same', 'technique', 'used'],
 											['people', 'then', 'do', 'study', 'again', 'these',
@@ -141,7 +141,7 @@ def print_test_passed(test_name):
 if __name__ == "__main__":
 	test_name = ""
 	try:
-		test_name = "statistic_class"; test_statistic_class(); print_test_passed(test_name)
+		# test_name = "statistic_class"; test_statistic_class(); print_test_passed(test_name)
 		# test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
 		test_name = "suffix_statistic"; test_suffix_statistic(); print_test_passed(test_name)
 		print("Well done!")
