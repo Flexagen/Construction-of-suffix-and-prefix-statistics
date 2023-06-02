@@ -20,7 +20,7 @@ public:
         count = 0;
         pos = 0;
         prev = nullptr;
-        for (int i = 0; i < 27; i++)
+        for (int i = 0; i < 37; i++)
             next[i] = nullptr;
     }
 };
