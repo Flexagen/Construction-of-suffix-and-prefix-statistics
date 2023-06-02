@@ -109,7 +109,9 @@ def test_prefix_statistic():
 	if p.most_common_in_text(10, 0) != [[]]:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 6")
 
-	# print(p.mean_frequency_of_occurrence('so that'))
+	p.add('if an '+text, n_prefix)
+	p.mean_frequency_of_occurrence('if an')
+	p.max_frequency_of_prefix_occurrence('if an')
 
 def test_suffix_statistic():
 	"""Тестирование модуля подсчёта статистики суффиксов"""
