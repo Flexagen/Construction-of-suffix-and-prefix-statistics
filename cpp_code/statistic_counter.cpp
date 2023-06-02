@@ -12,7 +12,7 @@ namespace py = pybind11;
 class node{
 public:
     node* prev;
-    node* next[37];
+    node* next[38];
     int count;
     int pos;
     std::string part;
@@ -135,7 +135,7 @@ public:
                         if (pref[i + p] == ' ')
                             k = 26;
                         if (pref[i] >= '0' && pref[i] <= '9')
-                            k = pref[i] - '0' + 27;;
+                            k = pref[i] - '0' + 27;
                         cur->next[k] = new node();
                         node* new_node = cur;
                         cur = cur->next[k];
@@ -201,7 +201,7 @@ public:
         std::string result = "";
         int count = cur->count;
         while(count > 0){
-            result = result + (char)((count % 10) + '0');
+            result = (char)((count % 10) + '0') + result;
             count /= 10;
         }
         result = get_by_number(pointer + 1) + " " + result;
