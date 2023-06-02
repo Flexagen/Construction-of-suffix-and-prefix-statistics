@@ -34,4 +34,6 @@ import StatistiCuM
 p = StatistiCuM.statistic_counter()
 p.add('test')
 print(p.get_next())
-```
+```  
+  
+<img width="90%" src="./images/main_image.jpg">
