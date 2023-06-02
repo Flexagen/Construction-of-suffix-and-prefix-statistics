@@ -111,8 +111,6 @@ public:
         node* cur = root;
         int len = pref.length();
         for (int i = 0; i < len; i++){
-            if (pref[i] >= 'A' && pref[i] <= 'Z')
-                pref[i] = pref[i] - 'A' + 'a';
             int j = pref[i] - 'a';
             if (pref[i] == ' ')
                 j = 26;
@@ -234,16 +232,16 @@ public:
 // {
 //     statistic_counter s;
 //     s.add("The is the link to019");
+//     s.add("is the Link to");
 //     s.add("is the link to");
-//     s.add("is the link to");
-//     s.add("is the link to");
+//     s.add("is the link To");
+//     s.add("the Link to");
+//     s.add("the");
 //     s.add("the link to");
 //     s.add("the");
-//     s.add("the link to");
 //     s.add("the");
 //     s.add("the");
-//     s.add("the");
-//     s.add("the");
+//     s.add("thE");
 //     s.add("the");
 //     std::string p = s.get_next();
 //     while(p != ""){
