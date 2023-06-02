@@ -1,40 +1,41 @@
 import StatistiCuM
 import string
 
-class Text:
-	def __init__(self, text):
-		self.text = text # hash text 
-		self.parsed_text = list(filter(lambda word: word != '', text.translate(str.maketrans('', '', string.punctuation))  \
-                            .replace('\t', '') \
-                            .replace('\n', '') \
-                            .split(' ')))
+from typing import List
+
 
 class PrefixStat:
-    def __init__(self, text, k):
+    def __init__(self, text, k) -> None:
         """Инициализация. Поиск всех префиксов по полученному текстому"""
-        self.stat = StatistiCuM.statistic_counter()
-        words = list(filter(lambda word: word != '', text.translate(str.maketrans('', '', string.punctuation))  \
-                            .replace('\t', '') \
-                            .replace('\n', '') \
-                            .split(' ')))
+        self.stat = []
+        self.text = []
+        self.add(text, k)
+
+    def add(self, text, k) -> None:
+        self.stat.append(StatistiCuM.statistic_counter())
+        self.text.append(list(filter(lambda word: word != '', text.translate(str.maketrans('', '', string.punctuation)) \
+                                .replace('\t', '') \
+                                .replace('\n', '') \
+                                .split(' '))))
         # print(words)
-        for cur in range(len(words) - k + 1):
+        index = len(self.stat)-1
+        for cur in range(len(self.text[index]) - k + 1):
             prefix = ""
             for word_id in range(k):
-                prefix += words[word_id + cur] + ' '
+                prefix += self.text[index][word_id + cur] + ' '
             # print(prefix)
-            self.stat.add(prefix.lower())
+            self.stat[index].add(prefix.lower())
 
-    def most_common_in_text(self, n):
+    def most_common_in_text(self, index, n) -> List[List]:
         """Cамые часто встречающиеся префиксы в данном текстов"""
-        self.stat.set_pointer(0)
+        self.stat[index].set_pointer(0)
         if n < 1:
-            return []
+            return [[]]
         arr = [[]]
         count = 0
         current_n = None
         last_n = None
-        s = self.stat.get_next()
+        s = self.stat[index].get_next()
 
         while s != ' ':
             if s == '':
@@ -59,20 +60,20 @@ class PrefixStat:
 
             arr[count].append(prefix[:len(prefix) - 1])
 
-            s = self.stat.get_next()
+            s = self.stat[index].get_next()
 
-        self.stat.set_pointer(0)
+        self.stat[index].set_pointer(0)
         return list(filter(lambda x: x != [], arr))
 
-    def most_common_in_word(self):
+    def most_common_in_word(self) -> None:
         """Самые часто встречаемые префиксы после заданного слова"""
         None
 
-    def mean_frequency_of_occurrence(self, prefix):
+    def mean_frequency_of_occurrence(self, prefix) -> None:
         """Средняя частота встречаемости заданного префикса в текстах"""
         None
 
-    def max_frequency_of_prefix_occurrence(self, prefix):
+    def max_frequency_of_prefix_occurrence(self, prefix) -> None:
         """Масимальная частота употребления заданного префикса в тексте"""
         None
 
