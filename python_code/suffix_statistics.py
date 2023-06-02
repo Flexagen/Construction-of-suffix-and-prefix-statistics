@@ -24,11 +24,8 @@ class SuffixStat:
         s = self.stat.get_next()
         prev = -1
         count = -1
-<<<<<<< HEAD
-        while s != "" and count < n - 1:
-=======
+
         while s != "":
->>>>>>> 5d97f6a83877f25b862a18efbaf3d7fd957f1367
             if int(s.split(' ')[-1]) != prev:
                 arr.append([])
                 prev = int(s.split(' ')[-1])

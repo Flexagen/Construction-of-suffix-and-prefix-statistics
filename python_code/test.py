@@ -28,7 +28,7 @@ def test_statistic_class():
 	while(s != ''):
 		assert(s != '')
 		assert(s != None)
-		# print(s)
+		print(s)
 		s = p.get_next()
 
 	if p.get_by_number(2) != "is the link":
