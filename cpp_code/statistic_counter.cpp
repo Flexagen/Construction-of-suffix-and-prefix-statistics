@@ -165,8 +165,7 @@ public:
                 j = 26;
             if (pref[i] >= '0' && pref[i] <= '9')
                 j = pref[i] - '0' + 27;
-            if (cur->next[j] != nullptr)
-            {
+            if (cur->next[j] != nullptr){
                 cur = cur->next[j];
                 i += cur->part.length();
             }
