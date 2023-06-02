@@ -50,7 +50,7 @@ def test_prefix_statistic():
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 3")
 	if n_prefix == 2 and p.most_common_in_text(1) != [['if an', 'an advert', 'be interested', 'the same', 'same technique']]:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 4")
-	print(p.most_common_in_text(10))
+	print(p.most_common_in_text(1))
 	if n_prefix == 2 and p.most_common_in_text(10) != [['if an', 'an advert', 'be interested', 'the same', 'same technique'],
 									 ['so that', 'that they', 'they can', 'can teach', 'teach them',
 									  'them to', 'to respond', 'respond to', 'to their', 'their advertising',
@@ -108,8 +108,8 @@ def test_suffix_statistic():
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 2")
 	if p.most_common_in_text_suffux(0) != []:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 3")
-	# if p.most_common_in_text_suffux(1) != [['to', 'the']]:
-	# 	raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 4")
+	if p.most_common_in_text_suffux(1) != [['to', 'the']]:
+		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 4")
 	if p.most_common_in_text_suffux(3) != [['if', 'can', 'be', 'of', 'is'],
 											['they', 'it', 'so', 'advert', 'a', 'an', 'you',
 											 'interested', 'tea', 'same', 'technique', 'used'],
@@ -146,8 +146,8 @@ if __name__ == "__main__":
 	test_name = ""
 	try:
 		test_name = "statistic_class"; test_statistic_class(); print_test_passed(test_name)
-		# test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
-		test_name = "suffix_statistic"; test_suffix_statistic(); print_test_passed(test_name)
+		test_name = "prefix_statistic"; test_prefix_statistic(); print_test_passed(test_name)
+		# test_name = "suffix_statistic"; test_suffix_statistic(); print_test_passed(test_name)
 		print("Well done!")
 	except AssertionError as error:
 		print("Test "+test_name+' '+'\033[101m'+"ERROR"+'\033[0m')

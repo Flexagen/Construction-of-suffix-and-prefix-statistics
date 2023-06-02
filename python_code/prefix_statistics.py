@@ -39,7 +39,7 @@ class PrefixStat:
             if s == '':
                 break
             data = s.split(' ')
-            # print(s)
+            print(s)
             last_n = current_n
             current_n = s[len(s) - 1]
             prefix = ""
@@ -59,6 +59,7 @@ class PrefixStat:
             arr[count].append(prefix[:len(prefix) - 1])
 
             s = self.stat.get_next()
+        self.stat.set_pointer(0)
         return list(filter(lambda x: x != [], arr))
 
     def most_common_in_word(self):
