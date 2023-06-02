@@ -1,3 +1,4 @@
+from typing import List
 import StatistiCuM
 import string
 
@@ -15,7 +16,7 @@ class SuffixStat:
             self.stat.add(suffix)
         
     
-    def most_common_in_text_suffux(self, n):
+    def most_common_in_text_suffux(self, n) -> List:
         """Cамые часто встречающиеся суффиксы в данном тексте"""
         self.stat.set_pointer(0)
         arr = [[]]
@@ -37,19 +38,18 @@ class SuffixStat:
         self.stat.set_pointer(0)
         return list(filter(lambda x: x != [], arr))
 
-    def most_common_in_word(self):
-        """Самые часто встречаемые префиксы после заданного слова"""
-        # потом
-        None
+    def most_common_in_word(self, suffix, n_text, text):
+        """Самые часто встречаемые суффиксы после заданного слова"""
+        arr = []
+        words = text.translate(str.maketrans('', '', string.punctuation)).replace("\t","").replace("\n","").split(' ')
+        
+        print(words)
+        return words
+        
 
-    def mean_frequency_of_occurrence(self, prefix):
+    def mean_frequency_of_occurrence(self, suffix, n_text):
         """Средняя частота встречаемости заданного суффикса в текстах"""
         # потом
-        None
-
-    def average_length(self):
-        """Cредняя длина префиксов в данном тексте"""
-        # число
         None
 
 if __name__ == "__main__":

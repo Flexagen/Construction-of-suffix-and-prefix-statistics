@@ -14,6 +14,8 @@ text = """Advertisers study how people learn so that they can 'teach' them to re
 		  refreshing drink."""
 n_prefix = 2
 n_suffux = 1
+suffix = "the"
+n_text = 2
 
 def test_statistic_class():
 	"""Тестирование .so обёртки для C++ структуры данных""" 
@@ -133,6 +135,8 @@ def test_suffix_statistic():
 											 'warming', 'cup', 'them', 'feeling', 'cosy', 'may', 'note',
 											 'name', 'here', 'being', 'as', 'with', 'cool', 'refreshing', 'drink']]:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 6")
+	
+	p.most_common_in_word(suffix, n_text, text)
 
 
 def print_test_passed(test_name):
