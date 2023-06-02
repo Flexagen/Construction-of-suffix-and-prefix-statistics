@@ -1,7 +1,8 @@
 import StatistiCuM
 import string
 
-class Suffix_Stat():
+
+class SuffixStat:
     def __init__(self, text, k):
         """Инициализация. Поиск всех суффиксов по полученному текстому"""
         self.stat = StatistiCuM.statistic_counter()
@@ -15,22 +16,19 @@ class Suffix_Stat():
         
     
     def most_common_in_text_suffux(self, n):
-
         """Cамые часто встречающиеся суффиксы в данном текстов"""
         array = []
-        count = -1
         s = self.stat.get_next()
         n = n+1
-        while(s != ''):
-            if(n > 0):
+        while s != '':
+            if n > 0 :
                 n -= 1
                 array.append(s.split(' '))
-                if(len(array) > 1 and array[len(array)-2][1] == array[len(array)-1][1]):
+                if len(array) > 1 and array[len(array)-2][1] == array[len(array)-1][1]:
                     n += 1
             s = self.stat.get_next()
         array = array[:-1]
-        print()
-        return(array)
+        return array
 
     def most_common_in_word(self):
         """Самые часто встречаемые префиксы после заданного слова"""

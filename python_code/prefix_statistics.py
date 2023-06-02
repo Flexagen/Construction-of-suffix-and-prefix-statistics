@@ -21,7 +21,6 @@ class PrefixStat:
     def most_common_in_text(self, n):
         """Cамые часто встречающиеся префиксы в данном текстов"""
         assert (n > 0)
-
         arr = [[]]
         count = 0
         current_n = None

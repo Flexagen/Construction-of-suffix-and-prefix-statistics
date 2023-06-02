@@ -1,6 +1,6 @@
 import StatistiCuM
-from prefix_statistics import Prefix_Stat
-from suffix_statistics import Suffix_Stat
+from prefix_statistics import PrefixStat
+from suffix_statistics import SuffixStat
 
 # Settings
 text = """Advertisers study how people learn so that they can 'teach' them to respond 
@@ -39,14 +39,48 @@ def test_statistic_class():
 
 
 def test_prefix_statistic():
-	p = Prefix_Stat(text, n_prefix)
-	print(p.most_common_in_text(2))
+	p = PrefixStat(text, n_prefix)
+	# print(p.most_common_in_text(2))
 
 
 def test_suffix_statistic():
 	"""Тестирование модуля подсчёта статистики суффиксов"""
-	p = Suffix_Stat(text, n_suffux)
-	print(p.most_common_in_text_suffux(3))
+	p = SuffixStat(text, n_suffux)
+	# Тест самых часто встречающихся суффиксов в данном тексте
+	if p.most_common_in_text_suffux(-10**20) != []:
+		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 1")
+	if p.most_common_in_text_suffux(-10) != []:
+		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 2")
+	if p.most_common_in_text_suffux(0) != []:
+		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 3")
+	if p.most_common_in_text_suffux(1) != [['to', 'the']]:
+		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 4")
+	if p.most_common_in_text_suffux(10) != [['if', 'can', 'be', 'of', 'is'],
+											['they', 'it', 'so', 'advert', 'a', 'an', 'you',
+											 'interested', 'tea', 'same', 'technique', 'used'],
+											['people', 'then', 'do', 'study', 'again', 'these',
+											 'are', 'teach', 'elements', 'advertising', 'learning',
+											 'interest', 'experience', 'repetition', 'that', 'how',
+											 'learn', 'achieve', 'this', 'respond', 'successful',
+											 'works', 'well', 'us', 'try', 'something', 'advertise',
+											 'different', 'things', 'for', 'example', 'in', 'winter',
+											 'weather', 'cold', 'want', 'see', 'their', 'family', 'having',
+											 'warming', 'cup', 'them', 'feeling', 'cosy', 'may', 'note',
+											 'name', 'here', 'being', 'as', 'with', 'cool', 'refreshing', 'drink']]:
+		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 5")
+	if p.most_common_in_text_suffux(10**20) != [['if', 'can', 'be', 'of', 'is'],
+											['they', 'it', 'so', 'advert', 'a', 'an', 'you',
+											 'interested', 'tea', 'same', 'technique', 'used'],
+											['people', 'then', 'do', 'study', 'again', 'these',
+											 'are', 'teach', 'elements', 'advertising', 'learning',
+											 'interest', 'experience', 'repetition', 'that', 'how',
+											 'learn', 'achieve', 'this', 'respond', 'successful',
+											 'works', 'well', 'us', 'try', 'something', 'advertise',
+											 'different', 'things', 'for', 'example', 'in', 'winter',
+											 'weather', 'cold', 'want', 'see', 'their', 'family', 'having',
+											 'warming', 'cup', 'them', 'feeling', 'cosy', 'may', 'note',
+											 'name', 'here', 'being', 'as', 'with', 'cool', 'refreshing', 'drink']]:
+		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 6")
 
 
 def print_test_passed(test_name):
