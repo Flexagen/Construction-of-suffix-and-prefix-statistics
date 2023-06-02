@@ -25,6 +25,18 @@ public:
     }
 };
 
+
+class index_error: public std::exception{
+public:
+    index_error(const std::string& message): message{message}{}
+    const char* what() const noexcept override{
+        return message.c_str();
+    }
+private:
+    std::string message;
+};
+
+
 // Вам над
 class statistic_counter{
 private:
@@ -33,17 +45,65 @@ private:
     std::pair<int, int>* count = new std::pair<int, int>[1000000];
     int size;
     int pointer;
+    node* split(node* cur, int& p){
+        std::string prev_part(cur->part.begin(), cur->part.begin() + p);
+        std::string new_part(cur->part.begin() + p, cur->part.end());
+        int k = new_part[0] - 'a';
+        if (new_part[0] == ' ')
+            k = 26;
+        node* new_node = new node();
+        new_node->prev = cur->prev;
+        new_node->part = prev_part;
+        new_node->next[k] = cur;
+        k = prev_part[0] - 'a';
+        if (prev_part[0] == ' ')
+            k = 26;
+        cur->prev->next[k] = new_node;
+        cur->prev = new_node;
+        cur->part = new_part;
+        return new_node;
+    }
+
+    void update_statistic(node* cur){
+        if (cur->count != 1){
+            if (count[cur->count - 1].second != count[cur->count - 1].first){
+                int prev_pos = statistic[count[cur->count - 1].first]->pos;
+                statistic[count[cur->count - 1].first]->pos = cur->pos;
+                std::swap(statistic[count[cur->count - 1].first], statistic[cur->pos]);
+                cur->pos = prev_pos;
+            }
+        }
+        else{
+            cur->pos = size;
+            statistic[size] = cur;
+            size ++;
+        }
+        count[cur->count - 1].first++;
+        count[cur->count].second++;
+    }
+
+    node* create_node(std::string part){
+        node* new_node = new node();
+        new_node->part = part;
+        new_node->count++;
+        count[new_node->count].second ++;
+        new_node->pos = size;
+        statistic[size] = new_node;
+        size ++;
+        return new_node;
+    }
+    
 public:
-    statistic_counter() {
+    statistic_counter(){
         root = new node();
         for (int i = 0; i < 100000; i++)
             count[i] = {0, 0};
         size = 0;
         pointer = 0;
     }
-// Добавление для префикса - просто слово передать, для суффикса - чуть посложнее ;)
-    void add(std::string pref)
-    {
+
+// Добавление преффикса/суффикса
+    void add(std::string pref){
         node* cur = root;
         int len = pref.length();
         for (int i = 0; i < len; i++){
@@ -53,83 +113,44 @@ public:
             if (pref[i] == ' ')
                 j = 26;
             if (cur->next[j] == nullptr){
-                cur->next[j] = new node();
+                std::string cur_part(pref.begin() + i, pref.end());
+                cur->next[j] = create_node(cur_part);
+                i = len - 1;
                 cur->next[j]->prev = cur;
                 cur = cur->next[j];
-                std::string cur_part(pref.begin() + i, pref.end());
-                cur->part = cur_part;
-                i = len - 1;
-                if (i == len - 1)
-                {
-                    cur->count++;
-                    count[cur->count].second ++;
-                    cur->pos = size;
-                    statistic[size] = cur;
-                    size ++;
-                }
             }
             else{
                 cur = cur->next[j];
                 std::string cur_part(pref.begin() + i, pref.end());
                 int p = 0;
                 for (p = 0; p < cur->part.length() && p < cur_part.length() && cur->part[p] == cur_part[p]; p++);
-                if (p < cur->part.length()) {
-                    std::string prev_part(cur->part.begin(), cur->part.begin() + p);
-                    std::string new_part(cur->part.begin() + p, cur->part.end());
-                    int k = new_part[0] - 'a';
-                    if (new_part[0] == ' ')
-                        k = 26;
-                    node* new_node = new node();
-                    new_node->prev = cur->prev;
-                    new_node->part = prev_part;
-                    new_node->next[k] = cur;
-                    k = prev_part[0] - 'a';
-                    if (prev_part[0] == ' ')
-                        k = 26;
-                    cur->prev->next[k] = new_node;
-                    cur->prev = new_node;
-                    cur->part = new_part;
-                    cur = new_node;
+                if (p < cur->part.length()){
+                    cur = split(cur, p);
                     if (i + p < len) {
-                        k = pref[i + p] - 'a';
+                        int k = pref[i + p] - 'a';
                         if (pref[i + p] == ' ')
                             k = 26;
-                        new_node->next[k] = new node();
-                        cur = new_node->next[k];
+                        cur->next[k] = new node();
+                        node* new_node = cur;
+                        cur = cur->next[k];
                         cur->prev = new_node;
                         std::string s(cur_part.begin() + p, cur_part.end());
                         cur->part = s;
                     }
                     i = len - 1;
                 }
-                else {
+                else
                     i += p - 1;
-                }
                 if (i >= len - 1){
                     cur->count++;
-                    if (cur->count != 1){
-                        if (count[cur->count - 1].second != count[cur->count - 1].first) {
-                            int prev_pos = statistic[count[cur->count - 1].first]->pos;
-                            statistic[count[cur->count - 1].first]->pos = cur->pos;
-                            std::swap(statistic[count[cur->count - 1].first], statistic[cur->pos]);
-                            cur->pos = prev_pos;
-                        }
-                    }
-                    else {
-                        cur->pos = size;
-                        statistic[size] = cur;
-                        size ++;
-                    }
-                    count[cur->count - 1].first++;
-                    count[cur->count].second++;
+                    update_statistic(cur);
                 }
             }
         }
     }
 
 // Получение числа префиксов/суффикса pref
-    int get_by_pref(std::string pref)
-    {
+    int get_by_pref(std::string pref){
         node* cur = root;
         int len = pref.length();
         bool fl = true;
@@ -148,12 +169,13 @@ public:
     }
 
 // Получение k-го по встречаемости преффикса/суффикса
-    std::string get_by_number(int k)
-    {
+    std::string get_by_number(int k){
         k --;
         node* cur = statistic[k];
+        if (k >= size)
+            throw index_error("!Exeption: There is no k-th element!");
         std::string result = "";
-        while(cur->prev != nullptr) {
+        while(cur->prev != nullptr){
             result = cur->part + result; 
             cur = cur->prev;
         }
@@ -162,10 +184,11 @@ public:
 
 // Получение следующего по встречаемости преффикса/суффикса я хз как нормально сделать поэтому колличество тупо через пробел верну
 // Можно while get_next(): использовать чтобы все слова получить.
-    std::string get_next()
-    {
-        if (pointer >= size)
+    std::string get_next(){
+        if (pointer >= size){
+            set_pointer(0);
             return "";
+        }
         node* cur = statistic[pointer];
         std::string result = "";
         int count = cur->count;
@@ -178,14 +201,14 @@ public:
         return result;
     }
 
-// Изменение текущего по встречаемости преффикса/суффикса возвращает текущий номер слова
+// Изменение текущего по встречаемости преффикса/суффикса возвращает текущий номер преффикса/суффикса
     int set_pointer(int new_value){
         int old_pointer = pointer;
         pointer = new_value;
         return old_pointer;
     }
 
-    ~statistic_counter() {
+    ~statistic_counter(){
         for (int i = 0; i < size; i++)
             delete statistic[i];
         delete [] statistic;
@@ -209,12 +232,11 @@ public:
 //     s.add("the");
 //     s.add("the");
 //     std::string p = s.get_next();
-//     while(p != "")
-//     {
+//     while(p != ""){
 //         std::cout << p << "\n";
 //         p = s.get_next();
 //     }
-//     std::cout << s.get_by_number(2) << "\n";
+//     std::cout << s.get_by_number(4) << "\n";
 // }
 
 PYBIND11_MODULE(StatistiCuM, module_handle) {
