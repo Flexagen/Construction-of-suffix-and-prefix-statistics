@@ -48,19 +48,16 @@ class SuffixStat:
         self.stat[index].set_pointer(0)
         return list(filter(lambda x: x != [], arr))
 
-    def max_frequency_of_suffix_occurrence(self, suffix, n_text):
+    def max_frequency_of_suffix_occurrence(self, suffix):
         """Максимальная частота употребления заданного суффикса в текстах"""
         arr = []
         for text in self.stat:
-            # arr = text.translate(str.maketrans('', '', string.punctuation)).replace("\t","").replace("\n","").split(' ')
-            # arr = list(filter(lambda x: x != '', arr))
-            # while text != '':
-            #     n = 1
-            # print(arr)
-            return text
+            arr.append(text.get_by_pref(suffix))
+            
+        return (max(arr))
         
 
-    def mean_frequency_of_suffix_occurrence(self, suffix, n_text):
+    def mean_frequency_of_suffix_occurrence(self, suffix):
         """Средняя частота встречаемости заданного суффикса в текстах"""
         # потом
         None

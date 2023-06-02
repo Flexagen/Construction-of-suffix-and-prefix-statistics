@@ -15,7 +15,7 @@ text = """Advertisers study how people learn so that they can 'teach' them to re
 n_prefix = 2
 n_suffux = 1
 suffix = "the"
-n_text = 2
+n_text = 1
 
 def test_statistic_class():
 	"""Тестирование .so обёртки для C++ структуры данных""" 
@@ -136,7 +136,13 @@ def test_suffix_statistic():
 											 'name', 'here', 'being', 'as', 'with', 'cool', 'refreshing', 'drink']]:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 6")
 	
-	print(p.max_frequency_of_suffix_occurrence(suffix, n_text))
+	p.add("""	Secondary schools are usually much larger than primary schools and most children - 
+				over 80 percent - go to a comprehensive school at the age of 11. These schools are 
+				for all. Pupils do not need (to pass an exam to go to these schools. These schools 
+				are large. They have from 1.200 - 2.500 pupils. School lasts all day in the UK, so 
+				there is only one shift. In some areas there are grammar schools. Pupils must pass 
+				special exams to go to these schools.""", n_suffux)
+	p.max_frequency_of_suffix_occurrence(suffix)
 
 
 def print_test_passed(test_name):
