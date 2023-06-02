@@ -17,12 +17,9 @@ class SuffixStat:
     
     def most_common_in_text_suffux(self, n):
         """Cамые часто встречающиеся суффиксы в данном тексте"""
-
-        """Cамые часто встречающиеся суффиксы в данном текстов"""
-        array = []
         arr = [[]]
         if (n < 1):
-            return array
+            return []
         s = self.stat.get_next()
         prev = -1
         count = -1
