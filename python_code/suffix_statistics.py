@@ -26,15 +26,17 @@ class SuffixStat:
         s = self.stat.get_next()
         prev = -1
         count = -1
-        while s != "" and count < n:
+        while s != "":
             if int(s.split(' ')[-1]) != prev:
                 arr.append([])
                 prev = int(s.split(' ')[-1]) 
                 count += 1
-            arr[count].append(s.split(' ')[:-1])
+            if (count == n):
+                break
+            arr[count].append(s.split(' ')[:-1][0])
             s = self.stat.get_next()
-        print(arr)
-        return(arr)
+        self.stat.set_pointer(0)
+        return list(filter(lambda x: x != [], arr))
 
     def most_common_in_word(self):
         """Самые часто встречаемые префиксы после заданного слова"""
