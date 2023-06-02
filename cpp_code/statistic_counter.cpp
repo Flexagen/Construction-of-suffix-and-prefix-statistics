@@ -8,7 +8,7 @@
 
 namespace py = pybind11;
 
-// Ето вам не надо
+//Ето вам не надо
 class node{
 public:
     node* prev;
@@ -186,6 +186,8 @@ public:
     }
 
     ~statistic_counter() {
+        for (int i = 0; i < size; i++)
+            delete statistic[i];
         delete [] statistic;
         delete [] count;
     }
