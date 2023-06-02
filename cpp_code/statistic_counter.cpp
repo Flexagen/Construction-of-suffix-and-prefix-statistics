@@ -12,7 +12,7 @@ namespace py = pybind11;
 class node{
 public:
     node* prev;
-    node* next[38];
+    node* next[37];
     int count;
     int pos;
     std::string part;
@@ -20,7 +20,7 @@ public:
         count = 0;
         pos = 0;
         prev = nullptr;
-        for (int i = 0; i < 37; i++)
+        for (int i = 0; i < 27; i++)
             next[i] = nullptr;
     }
 };
@@ -96,7 +96,7 @@ private:
         size ++;
         return new_node;
     }
-    
+
 public:
     statistic_counter(){
         root = new node();
@@ -106,16 +106,18 @@ public:
         pointer = 0;
     }
 
-// Добавление преффикса/суффикса 
+// Добавление преффикса/суффикса
     void add(std::string pref){
         node* cur = root;
         int len = pref.length();
         for (int i = 0; i < len; i++){
+            if (pref[i] >= 'A' && pref[i] <= 'Z')
+                pref[i] = pref[i] - 'A' + 'a';
             int j = pref[i] - 'a';
             if (pref[i] == ' ')
                 j = 26;
-            if (pref[i] >= '0' && pref[i] <= '9')
-                j = pref[i] - '0' + 27;
+            if (pref[0] >= '0' && pref[0] <= '9')
+                j = pref[0] - '0' + 27;
             if (cur->next[j] == nullptr){
                 std::string cur_part(pref.begin() + i, pref.end());
                 cur->next[j] = create_node(cur_part);
@@ -134,8 +136,8 @@ public:
                         int k = pref[i + p] - 'a';
                         if (pref[i + p] == ' ')
                             k = 26;
-                        if (pref[i] >= '0' && pref[i] <= '9')
-                            k = pref[i] - '0' + 27;
+                        if (pref[0] >= '0' && pref[0] <= '9')
+                            k = pref[0] - '0' + 27;;
                         cur->next[k] = new node();
                         node* new_node = cur;
                         cur = cur->next[k];
@@ -164,8 +166,8 @@ public:
             int j = pref[i] - 'a';
             if (pref[i] == ' ')
                 j = 26;
-            if (pref[i] >= '0' && pref[i] <= '9')
-                j = pref[i] - '0' + 27;
+            if (pref[0] >= '0' && pref[0] <= '9')
+                j = pref[0] - '0' + 27;
             if (cur->next[j] != nullptr)
                 cur = cur->next[j];
             else{
@@ -184,7 +186,7 @@ public:
             throw index_error("!Exeption: There is no k-th element!");
         std::string result = "";
         while(cur->prev != nullptr){
-            result = cur->part + result; 
+            result = cur->part + result;
             cur = cur->prev;
         }
         return result;
@@ -201,7 +203,7 @@ public:
         std::string result = "";
         int count = cur->count;
         while(count > 0){
-            result = (char)((count % 10) + '0') + result;
+            result = result + (char)((count % 10) + '0');
             count /= 10;
         }
         result = get_by_number(pointer + 1) + " " + result;
@@ -231,7 +233,7 @@ public:
 // int main()
 // {
 //     statistic_counter s;
-//     s.add("the is the link to019");
+//     s.add("The is the link to019");
 //     s.add("is the link to");
 //     s.add("is the link to");
 //     s.add("is the link to");
