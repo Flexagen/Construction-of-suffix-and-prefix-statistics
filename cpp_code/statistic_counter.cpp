@@ -42,7 +42,7 @@ class statistic_counter{
 private:
     node** statistic = new node*[200000000];
     node* root;
-    std::pair<int, int>* count = new std::pair<int, int>[20000000];
+    std::pair<int, int>* count = new std::pair<int, int>[1000000];
     int size;
     int pointer;
     node* split(node* cur, int& p){
@@ -232,7 +232,7 @@ public:
 // {
 //     statistic_counter s;
 //     s.add("the is the link to019");
-//     s.add("is the Link to");
+//     s.add("is the link to");
 //     s.add("is the link to");
 //     s.add("is the link to");
 //     s.add("the link to");
