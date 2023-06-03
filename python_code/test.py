@@ -15,6 +15,7 @@ text = """Advertisers study how people learn so that they can 'teach' them to re
 n_prefix = 2
 n_suffux = 1
 
+
 def test_statistic_class():
 	"""Тестирование .so обёртки для C++ структуры данных""" 
 	p = StatistiCuM.statistic_counter()
@@ -25,10 +26,12 @@ def test_statistic_class():
 
 	# Тестирование обхода заколненной структуры методов get_next
 	s = p.get_next()
+	size = 0
 	while(s != ''):
 		assert(s != '')
 		assert(s != None)
 		# print(s)
+		size += 1
 		s = p.get_next()
 
 	if p.get_by_number(2) != "is the link":
@@ -37,13 +40,17 @@ def test_statistic_class():
 	if p.get_by_pref('package') != 0:
 		raise AssertionError("Тест поиска префикса/суффикса")
 
+	if p.get_by_number(1) != 'the is ':
+		raise AssertionError("Тест проверки в структуре слова с маленьких букв")
+
 	n = p.get_size()
+	if n != size:
+		raise AssertionError("Тест подсчёта текущего размера в структуре")
+
 	for i in range(1, n+1):
 		if p.get_by_number(i) == p.get_next():
 			raise AssertionError("Тест поиск префикса/суффикса по номеру")
 
-	if p.get_by_number(1) != 'the is ':
-		raise AssertionError("Тест проверки в структуре слова с маленьких букв")
 
 def test_prefix_statistic():
 	p: PrefixStat = PrefixStat(text, n_prefix)
@@ -105,34 +112,57 @@ def test_prefix_statistic():
 	if p.most_common_in_text(-10, 0) != [[]]:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 7")
 	if p.most_common_in_text(1, 0) != [[]]:
-		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 7")
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 8")
 	if p.most_common_in_text(10, 0) != [[]]:
-		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 7")
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 9")
 
-	p.add('if an '+text+' of the scum of the scum', n_prefix)
-	p.mean_frequency_of_occurrence('if an')
-	p.max_frequency_of_prefix_occurrence('if an')
-	p.most_common_in_word(1, 'of the', 10**20)
+	p.add('if an of the scum of if an the scum1 2 if an of the tea of the scum', n_prefix)
+
+	if p.max_frequency_of_prefix_occurrence('if an') != 3:
+		raise AssertionError("Тест подсчёта максимальной частоты употребления заданного суффикса в текстах 1")
+
+	if p.max_frequency_of_prefix_occurrence(None) != 0 or p.max_frequency_of_prefix_occurrence(1) != 0:
+		raise AssertionError("Тест подсчёта максимальной частоты употребления заданного суффикса в текстах 2")
+
+	# print(p.max_frequency_of_prefix_occurrence('scum1 2'))
+	# if p.max_frequency_of_prefix_occurrence('scum1 2') != 1:
+	# 	raise AssertionError("Тест подсчёта максимальной частоты употребления заданного суффикса в текстах 3")
+
+	if p.mean_frequency_of_occurrence('if an') != 2.5:
+		raise AssertionError("Тест подсчёта средней частоты употребления заданного суффикса в текстах 1")
+
+	if p.mean_frequency_of_occurrence(None) != 0.0 or p.mean_frequency_of_occurrence(1) != 0.0:
+		raise AssertionError("Тест подсчёта средней частоты употребления заданного суффикса в текстах 2")
+
+	# if p.mean_frequency_of_occurrence("scum1 2") != 0.5:
+	# 	raise AssertionError("Тест подсчёта средней частоты употребления заданного суффикса в текстах 3")
+
+	if p.most_common_in_word(1, 'of the', 10**20) != [['scum'], ['tea']]:
+		raise AssertionError("Тест самых часто встречаемых префиксов после заданного префикса 1")
+
+	if p.most_common_in_word(1, 'of the', 10**20, with_number=True) != [['scum 2'], ['tea 1']]:
+		raise AssertionError("Тест самых часто встречаемых префиксов после заданного префикса 2")
+
 
 def test_suffix_statistic():
 	"""Тестирование модуля подсчёта статистики суффиксов"""
 	p = SuffixStat(text, n_suffux)
 
 	# Тест самых часто встречающихся суффиксов в данном тексте
-	if p.most_common_in_text_suffux(0, -10**20) != []:
+	if p.most_common_in_text(0, -10 ** 20) != []:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 1")
-	if p.most_common_in_text_suffux(0, -10) != []:
+	if p.most_common_in_text(0, -10) != []:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 2")
-	if p.most_common_in_text_suffux(0, 0) != []:
+	if p.most_common_in_text(0, 0) != []:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 3")
-	if p.most_common_in_text_suffux(0, 1) != [['to', 'the']]:
+	if p.most_common_in_text(0, 1) != [['to', 'the']]:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 4")
-	if p.most_common_in_text_suffux(0, 3) != [['to', 'the'], ['and'], ['if', 'can', 'be', 'of', 'is']]:
+	if p.most_common_in_text(0, 3) != [['to', 'the'], ['and'], ['if', 'can', 'be', 'of', 'is']]:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 5")
-	if p.most_common_in_text_suffux(0, 10**20) != [['to', 'the'], ['and'], ['if', 'can', 'be', 'of', 'is'],
-											['they', 'it', 'so', 'advert', 'a', 'an', 'you',
+	if p.most_common_in_text(0, 10 ** 20) != [['to', 'the'], ['and'], ['if', 'can', 'be', 'of', 'is'],
+											  ['they', 'it', 'so', 'advert', 'a', 'an', 'you',
 											 'interested', 'tea', 'same', 'technique', 'used'],
-											['people', 'then', 'do', 'study', 'again', 'these',
+											  ['people', 'then', 'do', 'study', 'again', 'these',
 											 'are', 'teach', 'elements', 'advertising', 'learning',
 											 'interest', 'experience', 'repetition', 'that', 'how',
 											 'learn', 'achieve', 'this', 'respond', 'successful',
@@ -142,11 +172,11 @@ def test_suffix_statistic():
 											 'warming', 'cup', 'them', 'feeling', 'cosy', 'may', 'note',
 											 'name', 'here', 'being', 'as', 'with', 'cool', 'refreshing', 'drink']]:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 6")
-	if p.most_common_in_text_suffux(-10, 0) != []:
+	if p.most_common_in_text(-10, 0) != []:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 7")
-	if p.most_common_in_text_suffux(1, 0) != []:
+	if p.most_common_in_text(1, 0) != []:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 8")
-	if p.most_common_in_text_suffux(10, 0) != []:
+	if p.most_common_in_text(10, 0) != []:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 9")
 
 	p.add("""	Secondary schools are usually much larger than primary schools and most children - 
@@ -154,9 +184,26 @@ def test_suffix_statistic():
 				for all. Pupils do not need (to pass an exam to go to these schools. These schools 
 				are large. They have from 1.200 - 2.500 pupils. School lasts all day in the UK, so 
 				there is only one shift. In some areas there are grammar schools. Pupils must pass 
-				special exams to go to these schools. to to to to to to to to to to to""", n_suffux)
-	p.max_frequency_of_suffix_occurrence("to")
-	p.mean_frequency_of_suffix_occurrence("to")
+				special exams to go to these schools. to to to to to to to to to to to 1""", n_suffux)
+
+	if p.max_frequency_of_suffix_occurrence("to") != 17:
+		raise AssertionError("Тест подсчёта максимальной частоты употребления заданного суффикса в текстах 1")
+
+	if p.max_frequency_of_suffix_occurrence(None) != 0 or p.max_frequency_of_suffix_occurrence(1) != 0:
+		raise AssertionError("Тест подсчёта максимальной частоты употребления заданного суффикса в текстах 2")
+
+	if p.max_frequency_of_suffix_occurrence("1") != 1:
+		raise AssertionError("Тест подсчёта максимальной частоты употребления заданного суффикса в текстах 3")
+
+	if p.mean_frequency_of_suffix_occurrence("to") != 12.0:
+		raise AssertionError("Тест подсчёта средней частоты употребления заданного суффикса в текстах 1")
+
+	if p.mean_frequency_of_suffix_occurrence(None) != 0.0 or p.mean_frequency_of_suffix_occurrence(1) != 0.0:
+		raise AssertionError("Тест подсчёта средней частоты употребления заданного суффикса в текстах 2")
+
+	if p.mean_frequency_of_suffix_occurrence("1") != 0.5:
+		raise AssertionError("Тест подсчёта средней частоты употребления заданного суффикса в текстах 3")
+
 
 def print_test_passed(test_name):
 	print("Test "+test_name+" "+'\033[42m'+"PASSED"+'\033[0m')
