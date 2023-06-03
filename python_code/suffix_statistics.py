@@ -25,7 +25,7 @@ class SuffixStat:
     
     def most_common_in_text(self, index, n) -> List:
         """Cамые часто встречающиеся суффиксы в данном тексте"""
-        if n < 1 or index < 0 or index > len(self.stat) - 1:
+        if type(index) != int or type(n) != int or n < 1 or index < 0 or index > len(self.stat)-1:
             return []
         self.stat[index].set_pointer(0)
         arr = [[]]

@@ -13,7 +13,7 @@ class PrefixStat:
 
     def add(self, text, k) -> None:
         """Добавление текста для анализа статистики префиксов/суффиксов"""
-        assert(type(text) == str)
+        assert(type(text) == str and type(k) == int)
         self.stat.append(StatistiCuM.statistic_counter())
         self.text.append(list(filter(lambda word: word != '', text.translate(str.maketrans('', '', string.punctuation)) \
                                 .replace('\t', '') \
@@ -29,14 +29,13 @@ class PrefixStat:
 
     def most_common_in_text(self, index, n) -> List[List]:
         """Cамые часто встречающиеся префиксы в данном текстов"""
-        if n < 1 or index < 0 or index > len(self.stat)-1:
+        if type(index) != int or type(n) != int or n < 1 or index < 0 or index > len(self.stat)-1:
             return [[]]
         return self.most_common_in_statistic(self.stat[index], n)
 
     def most_common_in_word(self, index, prefix, n, with_number=False) -> None:
         """Самые часто встречаемые суффиксы после заданного префикса"""
-        assert(type(prefix) == str)
-        if n < 1 or index < 0 or index > len(self.stat) - 1:
+        if type(prefix) != str or type(index) != int or type(n) != int or n < 1 or index < 0 or index > len(self.stat)-1:
             return [[]]
         s = prefix.split(' ')
         suffux = StatistiCuM.statistic_counter()
@@ -91,7 +90,6 @@ class PrefixStat:
         for text in self.stat:
             if text.get_by_pref(prefix) > max:
                 max = text.get_by_pref(prefix)
-                print(text.get_by_pref(prefix))
         return max
 
 

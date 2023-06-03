@@ -111,10 +111,15 @@ def test_prefix_statistic():
 
 	if p.most_common_in_text(-10, 0) != [[]]:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 7")
+
 	if p.most_common_in_text(1, 0) != [[]]:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 8")
+
 	if p.most_common_in_text(10, 0) != [[]]:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 9")
+
+	if p.most_common_in_text(None, None) != [[]] or p.most_common_in_text("0", "1") != [[]]:
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 10")
 
 	p.add('if an of the scum of if an the scum1 2 if an of the tea of the scum', n_prefix)
 
@@ -124,9 +129,8 @@ def test_prefix_statistic():
 	if p.max_frequency_of_prefix_occurrence(None) != 0 or p.max_frequency_of_prefix_occurrence(1) != 0:
 		raise AssertionError("Тест подсчёта максимальной частоты употребления заданного суффикса в текстах 2")
 
-	# print(p.max_frequency_of_prefix_occurrence('scum1 2'))
-	# if p.max_frequency_of_prefix_occurrence('scum1 2') != 1:
-	# 	raise AssertionError("Тест подсчёта максимальной частоты употребления заданного суффикса в текстах 3")
+	if p.max_frequency_of_prefix_occurrence('scum1 2') != 1:
+		raise AssertionError("Тест подсчёта максимальной частоты употребления заданного суффикса в текстах 3")
 
 	if p.mean_frequency_of_occurrence('if an') != 2.5:
 		raise AssertionError("Тест подсчёта средней частоты употребления заданного суффикса в текстах 1")
@@ -134,13 +138,16 @@ def test_prefix_statistic():
 	if p.mean_frequency_of_occurrence(None) != 0.0 or p.mean_frequency_of_occurrence(1) != 0.0:
 		raise AssertionError("Тест подсчёта средней частоты употребления заданного суффикса в текстах 2")
 
-	# if p.mean_frequency_of_occurrence("scum1 2") != 0.5:
-	# 	raise AssertionError("Тест подсчёта средней частоты употребления заданного суффикса в текстах 3")
+	if p.mean_frequency_of_occurrence("scum1 2") != 0.5:
+		raise AssertionError("Тест подсчёта средней частоты употребления заданного суффикса в текстах 3")
 
 	if p.most_common_in_word(1, 'of the', 10**20) != [['scum'], ['tea']]:
 		raise AssertionError("Тест самых часто встречаемых префиксов после заданного префикса 1")
 
 	if p.most_common_in_word(1, 'of the', 10**20, with_number=True) != [['scum 2'], ['tea 1']]:
+		raise AssertionError("Тест самых часто встречаемых префиксов после заданного префикса 2")
+
+	if p.most_common_in_word(1, None, 10**20) != [[]] or p.most_common_in_word(None, "1", "2") != [[]] or p.most_common_in_word("0", "abba", None) != [[]]:
 		raise AssertionError("Тест самых часто встречаемых префиксов после заданного префикса 2")
 
 
@@ -172,12 +179,18 @@ def test_suffix_statistic():
 											 'warming', 'cup', 'them', 'feeling', 'cosy', 'may', 'note',
 											 'name', 'here', 'being', 'as', 'with', 'cool', 'refreshing', 'drink']]:
 		raise AssertionError("Тест самых часто встречающихся суффиксов в данном тексте 6")
+
 	if p.most_common_in_text(-10, 0) != []:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 7")
+
 	if p.most_common_in_text(1, 0) != []:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 8")
+
 	if p.most_common_in_text(10, 0) != []:
 		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 9")
+
+	if p.most_common_in_text(None, None) != [] or p.most_common_in_text("0", "1") != []:
+		raise AssertionError("Тест самых часто встречающихся префиксов в данном тексте 10")
 
 	p.add("""	Secondary schools are usually much larger than primary schools and most children - 
 				over 80 percent - go to a comprehensive school at the age of 11. These schools are 
