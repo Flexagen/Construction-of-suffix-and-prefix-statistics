@@ -67,7 +67,7 @@ print(example.most_common_in_text(0, 10))
 ### Использование custom структуры для статистики суффиксов/префиксов
 Для хранения суффиксов/префиксов и их статистики была создана [собственная структура на C++](https://github.com/Flexagen/Construction-of-suffix-and-prefix-statistics/blob/main/cpp_code/statistic_counter.cpp), в основе которой лежит бор укказателей, чтобы максимально оптимизировать и ускорить алгоритм Маркова.  
   
-С помощью библиотки pybind11 созданная структура обёрнута в [python .so и .pyd библиотки](https://github.com/Flexagen/Construction-of-suffix-and-prefix-statistics/blob/main/python_code/statistics.so) - "Статистикум" (StatistiCuM).
+С помощью библиотки pybind11 созданная структура обёрнута в [python .so и .pyd библиотки](https://github.com/Flexagen/Construction-of-suffix-and-prefix-statistics/blob/main/python_code) - "Статистикум" (StatistiCuM).
 Обёртка класса была создана для двух ОС Windows и Linux (файлы .pyd и .so соответсвенно в /python_code). Для их получения достаточно установить через pip pybind11 и запустить скрипт сборки бибиотеки - /cpp_code/setup.py.  
 ```bash
 python3 setup.py build_ext -i
@@ -84,6 +84,6 @@ print(p.get_next())
 <center><a>
     <img style="width: 350px" src="./images/main_image.jpg">
       <div style='width: 90%; text-align: center;'><b>Показательная схема внутренней работы созданных модулей</b></div>
-</a></center>  
-Для её тестирования и базового использования написаны [мини-тесты](https://github.com/Flexagen/Construction-of-suffix-and-prefix-statistics/blob/main/python_code/test.py)
-(функциональные, позитивные и негативные).
+</a></center><br>  
+
+Для её тестирования и базового использования написаны [тесты](https://github.com/Flexagen/Construction-of-suffix-and-prefix-statistics/blob/main/python_code/test.py) (функциональные, позитивные и негативные).
