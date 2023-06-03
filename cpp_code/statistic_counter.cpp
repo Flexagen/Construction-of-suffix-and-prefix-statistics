@@ -40,9 +40,9 @@ private:
 // Вам надо ето
 class statistic_counter{
 private:
-    node** statistic = new node*[200000000];
+    node** statistic = new node*[2000000];
     node* root;
-    std::pair<int, int>* count = new std::pair<int, int>[1000000];
+    std::pair<int, int>* count = new std::pair<int, int>[2000000];
     int size;
     int pointer;
     node* split(node* cur, int& p){
@@ -99,7 +99,7 @@ private:
 public:
     statistic_counter(){
         root = new node();
-        for (int i = 0; i < 1000000; i++)
+        for (int i = 0; i < 2000000; i++)
             count[i] = {0, 0};
         size = 0;
         pointer = 0;
@@ -120,7 +120,6 @@ public:
                 cur->next[j] = create_node(cur_part);
                 i = len - 1;
                 cur->next[j]->prev = cur;
-                cur = cur->next[j];
             }
             else{
                 cur = cur->next[j];
@@ -133,8 +132,8 @@ public:
                         int k = pref[i + p] - 'a';
                         if (pref[i + p] == ' ')
                             k = 26;
-                        if (pref[i] >= '0' && pref[i] <= '9')
-                            k = pref[i] - '0' + 27;;
+                        if (pref[i + p] >= '0' && pref[i + p] <= '9')
+                            k = pref[i + p] - '0' + 27;;
                         cur->next[k] = new node();
                         node* new_node = cur;
                         cur = cur->next[k];
@@ -176,6 +175,8 @@ public:
                         fl = false;
                         break;
                     }
+                if (!fl)
+                    break;
                 i--;
             }
             else{
@@ -246,7 +247,7 @@ public:
 //     s.add("is the link to");
 //     s.add("is the link to");
 //     s.add("the link to");
-//     s.add("the");
+//     s.add("1 1");
 //     s.add("the link to");
 //     s.add("the");
 //     s.add("the");
@@ -263,6 +264,7 @@ public:
 //         p = s.get_next();
 //     }
 //     std::cout << s.get_by_number(4) << "\n";
+//     std::cout << "\n";
 //     std::cout << s.get_by_pref("is the link to") << "\n";
 // }
 
