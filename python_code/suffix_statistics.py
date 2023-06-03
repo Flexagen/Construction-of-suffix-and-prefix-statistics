@@ -12,20 +12,18 @@ class SuffixStat:
         self.add(text, k)
 
     def add(self, text, k) -> None:
+        assert(type(text) == str)
         self.stat.append(StatistiCuM.statistic_counter())
         self.text.append(list(filter(lambda word: word != '', text.translate(str.maketrans('', '', string.punctuation)) \
                                 .replace('\t', '') \
                                 .replace('\n', '') \
                                 .split(' '))))
-        # print(words)
         index = len(self.stat)-1
         for cur in range(len(self.text[index]) - k):
             suffix = self.text[index][cur+k]
-            # print (list(suffix))
             self.stat[index].add(suffix.lower())
-        
     
-    def most_common_in_text_suffux(self, index, n) -> List:
+    def most_common_in_text(self, index, n) -> List:
         """Cамые часто встречающиеся суффиксы в данном тексте"""
         if n < 1 or index < 0 or index > len(self.stat) - 1:
             return []
@@ -34,7 +32,6 @@ class SuffixStat:
         s = self.stat[index].get_next()
         prev = -1
         count = -1
-
         while s != "":
             if int(s.split(' ')[-1]) != prev:
                 arr.append([])
@@ -47,17 +44,20 @@ class SuffixStat:
         self.stat[index].set_pointer(0)
         return list(filter(lambda x: x != [], arr))
 
-    def max_frequency_of_suffix_occurrence(self, suffix):
+    def max_frequency_of_suffix_occurrence(self, suffix) -> int:
         """Максимальная частота употребления заданного суффикса в текстах"""
-        max = 0
+        if type(suffix) != str:
+            return 0
+        max_n: int = 0
         for text in self.stat:
-            if max < text.get_by_pref(suffix):
-                max = text.get_by_pref(suffix)
-        return (max)
-        
+            if text.get_by_pref(suffix) > max_n:
+                max_n = text.get_by_pref(suffix)
+        return max_n
 
-    def mean_frequency_of_suffix_occurrence(self, suffix):
+    def mean_frequency_of_suffix_occurrence(self, suffix) -> float:
         """Средняя частота встречаемости заданного суффикса в текстах"""
+        if type(suffix) != str:
+            return 0.0
         arr = []
         for text in self.stat:
             arr.append(text.get_by_pref(suffix))
