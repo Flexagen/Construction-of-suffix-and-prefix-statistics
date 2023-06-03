@@ -12,7 +12,7 @@ class PrefixStat:
         self.add(text, k)
 
     def add(self, text, k) -> None:
-        """Добавление текста для анализа статистики префиксов/суффиксов"""
+        """Добавление текста для анализа статистики префиксов"""
         assert(type(text) == str and type(k) == int)
         self.stat.append(StatistiCuM.statistic_counter())
         self.text.append(list(filter(lambda word: word != '', text.translate(str.maketrans('', '', string.punctuation)) \

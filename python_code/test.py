@@ -153,7 +153,7 @@ def test_prefix_statistic():
 
 def test_suffix_statistic():
 	"""Тестирование модуля подсчёта статистики суффиксов"""
-	p = SuffixStat(text, n_suffux)
+	p: SuffixStat = SuffixStat(text, n_suffux)
 
 	# Тест самых часто встречающихся суффиксов в данном тексте
 	if p.most_common_in_text(0, -10 ** 20) != []:
