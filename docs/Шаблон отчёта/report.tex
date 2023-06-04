@@ -1,0 +1,125 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[russian]{babel}
+%\usepackage{cmlgc}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+%\usepackage{courier}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+
+\makeatletter
+\renewcommand\@biblabel[1]{#1.}
+\makeatother
+
+\newcommand{\myrule}[1]{\rule{#1}{0.4pt}}
+\newcommand{\sign}[2][~]{{\small\myrule{#2}\\[-0.7em]\makebox[#2]{\it #1}}}
+
+% Поля
+\usepackage[top=20mm, left=30mm, right=10mm, bottom=20mm, nohead]{geometry}
+\usepackage{indentfirst}
+
+% Межстрочный интервал
+\renewcommand{\baselinestretch}{1.50}
+
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\begin{document}
+\thispagestyle{empty}
+\begin{center}
+\renewcommand{\baselinestretch}{1}
+{\normalsize {Министерство науки и высшего образования Российской Федерации\\
+Федеральное государственное бюджетное образовательное\\
+учреждение высшего образования\\}
+\large
+{\sc <<Петрозаводский государственный университет>>\\
+Институт математики и информационных технологий
+}
+}
+\end{center}
+
+
+\begin{center}
+09.03.04 - Программная инженерия\\
+Профиль направления подготовки бакалавриата\\
+<<Системное и прикладное программное обеспечение>>\\
+\end{center}
+
+\vfill
+
+\begin{center}
+\medskip
+	{\Large \sc {Отчёт о прохождении производственной практики\\}}
+\end{center}
+
+\vfill
+\vfill
+\vfill
+
+\medskip
+
+\begin{flushright}
+\parbox{9cm}{%
+\renewcommand{\baselinestretch}{1.2}
+\normalsize
+	Выполнил:\\
+студент 2 курса группы 22207
+\begin{flushright}
+Scamer Cum Cumych
+\end{flushright}
+Место прохождения практики: \\
+Кафедра информатики и математического обеспечения\\
+
+Сроки прохождения практики: \\
+30.05-09.06\\
+
+Руководитель практики:\\
+к.т.н., доцент\\
+Богоявленская Ольга Юрьевна\\
+
+\begin{flushright}
+Оценка
+  \sign[]{4cm}
+\end{flushright}
+
+\begin{flushright}
+Дата
+  \sign[]{4cm}
+\end{flushright}
+}
+\end{flushright}
+
+\vfill
+
+\begin{center}
+\large
+    Петрозаводск --- 2023
+\end{center}
+
+\newpage
+\tableofcontents
+
+\newpage
+\section*{Введение}
+\addcontentsline{toc}{section}{Введение}
+
+
+\newpage
+\addcontentsline{toc}{section}{Список литературы}
+\begin{thebibliography}{}
+	\bibitem{} {}
+\end{thebibliography}
+\end{document}
