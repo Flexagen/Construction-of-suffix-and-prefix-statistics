@@ -1,6 +1,5 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[cod]
 *$py.class
 
 .vscode
@@ -8,6 +7,8 @@ __pycache__/
 cpp_code/pybind11/
 
 # C extensions
+
+docs\Flexagen/
 
 # Distribution / packaging
 .Python
