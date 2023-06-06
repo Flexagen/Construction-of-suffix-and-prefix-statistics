@@ -33,7 +33,7 @@ class PrefixStat:
             return [[]]
         return self.most_common_in_statistic(self.stat[index], n)
 
-    def most_common_in_word(self, index, prefix, n, with_number=False) -> None:
+    def most_common_in_word(self, index, prefix, n, with_number=False) -> List[List]:
         """Самые часто встречаемые суффиксы после заданного префикса"""
         if type(prefix) != str or type(index) != int or type(n) != int or n < 1 or index < 0 or index > len(self.stat)-1:
             return [[]]
@@ -49,7 +49,7 @@ class PrefixStat:
         return self.most_common_in_statistic(suffux, n, with_number=with_number)
 
     @private
-    def most_common_in_statistic(self, stat, n, with_number=False):
+    def most_common_in_statistic(self, stat, n, with_number=False) -> List[List]:
         """Создание списка из n по частоте элементов в структуре stat"""
         stat.set_pointer(0)
         arr = [[]]
