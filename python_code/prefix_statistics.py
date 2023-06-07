@@ -83,7 +83,7 @@ class PrefixStat:
         return sum(arr)/len(arr)
 
     def max_frequency_of_prefix_occurrence(self, prefix) -> int:
-        """Масимальная частота употребления заданного префикса в текстах"""
+        """Максимальная частота употребления заданного префикса в текстах"""
         if type(prefix) != str:
             return 0
         max = 0
